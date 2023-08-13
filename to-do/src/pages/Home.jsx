@@ -6,21 +6,33 @@ import AddTask from '../components/AddTask'
 
 const Home = () => {
   return (
-    <div className=' bg-slate-200'>
+    <div className=" bg-slate-200">
       <Navbar />
       <div className=" flex w-full">
-        <div className=" w-2/12 mr-8">
+        <div className=" md:w-2/12 mr-8 max-md:hidden">
           <Sidebar />
         </div>
         <div className=" w-7/12 ">
+          <h1 className=" text-blue-700 text-[22px]">Good morning name</h1>
+          <div className=" flex space-x-5">
+            <div className=" flex flex-col leading-5">
+              <span className=" text-[15px] text-slate-400">Sunday</span>
+              <span className=" text-center text-[20px] font-bold">13</span>
+              <span className=" text-[15px] text-slate-400">August</span>
+            </div>
+            <div className=" flex flex-col leading-5 pt-4" >
+              <span>6:45p.m - 8:00p.m</span>
+              <p>task due: read </p>
+            </div>
+          </div>
           <Task />
           <Task />
           <Task />
           <Task />
           <Task />
         </div>
-        <div className=' w-3/12'>
-            <AddTask />
+        <div className=" w-3/12 max-md:hidden">
+          <AddTask />
         </div>
       </div>
     </div>
