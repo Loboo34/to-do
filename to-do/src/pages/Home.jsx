@@ -6,13 +6,14 @@ import AddTask from '../components/AddTask'
 
 const Home = () => {
   return (
-    <div>
+    <div className=' bg-slate-200'>
       <Navbar />
       <div className=" flex w-full">
-        <div className=" w-3/12">
+        <div className=" w-2/12 mr-8">
           <Sidebar />
         </div>
-        <div className=" w-6/12">
+        <div className=" w-7/12 ">
+          <Task />
           <Task />
           <Task />
           <Task />
