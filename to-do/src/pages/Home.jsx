@@ -13,11 +13,11 @@ const Home = () => {
           <Sidebar />
         </div>
         <div className=" w-7/12 ">
-          <h1 className=" text-blue-700 text-[22px]">Good morning name</h1>
+          <h1 className=" text-blue-700 text-[22px] pt-5">Good morning name</h1>
           <div className=" flex space-x-5">
             <div className=" flex flex-col leading-5">
               <span className=" text-[15px] text-slate-400">Sunday</span>
-              <span className=" text-center text-[20px] font-bold">13</span>
+              <span className=" text-center text-[22px] font-bold">13</span>
               <span className=" text-[15px] text-slate-400">August</span>
             </div>
             <div className=" flex flex-col leading-5 pt-4" >
@@ -29,7 +29,7 @@ const Home = () => {
           <Task />
           <Task />
           <Task />
-          <Task />
+          
         </div>
         <div className=" w-3/12 max-md:hidden">
           <AddTask />

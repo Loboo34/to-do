@@ -3,3 +3,11 @@
 @tailwind components;
 
 @tailwind utilities;
+
+
+
+.overlaycontainer:hover .overlay {
+   display: inline-block;
+   z-index: 1;
+  
+}
