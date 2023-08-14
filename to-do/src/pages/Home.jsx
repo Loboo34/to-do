@@ -4,6 +4,7 @@ import Task from '../components/Task'
 import Sidebar from '../components/Sidebar'
 import AddTask from '../components/AddTask'
 
+
 const Home = () => {
   return (
     <div className=" bg-slate-200">
