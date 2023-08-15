@@ -8,12 +8,14 @@ import {
 
 import Home from './pages/Home'
 import Singup from './pages/Singup';
+import Login from './pages/Login';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/' element={<Home />} />
       <Route path='signup' element={<Singup />} />
+      <Route path='signin' element={<Login />} />
     </Route>
   )
 )
