@@ -1,7 +1,7 @@
 import React from 'react'
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTrashCan
+  faTrashCan, faThumbTack
 } from "@fortawesome/free-solid-svg-icons";
 
 const Task = () => {
@@ -13,10 +13,16 @@ const Task = () => {
           <p>my list:taks</p>
           <h1 className=" text-[22px]">name</h1>
         </div>
-        <FontAwesomeIcon
-          icon={faTrashCan}
-          className=" absolute hidden right-0 pr-8 text-blue-700 overlay"
-        />
+        <div>
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            className=" absolute hidden right-0 pr-8 text-blue-700 overlay"
+          />
+          <FontAwesomeIcon
+            icon={faThumbTack}
+            className=" absolute hidden right-10 pr-6 text-blue-700 rotate-45 pt-3 overlay"
+          />
+        </div>
       </label>
     </div>
   );
