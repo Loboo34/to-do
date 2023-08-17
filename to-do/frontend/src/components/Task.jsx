@@ -16,11 +16,11 @@ const Task = () => {
         <div>
           <FontAwesomeIcon
             icon={faTrashCan}
-            className=" absolute hidden right-0 pr-6 text-blue-700 transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:text-red-500 overlay"
+            className=" absolute hidden right-0 pr-6 text-blue-700 transition ease-in-out hover:scale-110 hover:text-red-500 overlay"
           />
           <FontAwesomeIcon
             icon={faThumbTack}
-            className=" absolute hidden right-10 pr-6 text-blue-700 transition ease-in-out hover:-translate-y-1 hover:scale-110  rotate-45 pt-3 overlay"
+            className=" absolute hidden right-10 pr-6 text-blue-700 transition ease-in-out  hover:scale-110  rotate-45 pt-3 overlay"
           />
         </div>
       </label>
