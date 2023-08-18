@@ -12,21 +12,16 @@ const AddTask = () => {
         <label className="">
           <p className=" text-[16px] pb-1 font-semibold">Type:</p>
           <select className=" w-[184px]">
-            <input
-              type="text"
-              placeholder=""
-              className=" mb-5 "
-              required
-            />
+            <input type="text" placeholder="" className=" mb-5 " required />
             <option value="personal">Work</option>
             <option value="personal">Groceries</option>
             <option value="personal">Shopping</option>
             <option value="personal">Personal</option>
           </select>
         </label>
-        <label className="">
+        <label className="mt-4">
           <p className=" text-[16px] pb-1 font-semibold">Due Date:</p>
-          <input type="date" className=" mb-5 w-[184px]" />
+          <input type="date" className="  mb-5 w-[184px]" />
         </label>
         <label className="">
           <p className=" text-[16px] pb-1 font-semibold">Time:</p>
