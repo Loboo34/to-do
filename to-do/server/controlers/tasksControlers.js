@@ -40,12 +40,28 @@ const addTask = async(req, res) => {
 
 //delete task
 const deleteTask = async(req,res) => {
-    
+    const { id } = req.params
+
+     if (!mongoose.Types.ObjectId.isValid(id)) {
+       return res.status(404).json({ error: "No such Task" });
+     }
+
+     const task = await Tasks.findOneAndDelete({_id: id})
+
+  if (!task) {
+    return res.status(404).json({ error: "No such Task" });
+  }
+
+  res.status(200).json(task); 
+
 }
+
+
 
 module.exports = {
     getTasks,
     getTask,
-    addTask
+    addTask,
+    deleteTask
     
 }

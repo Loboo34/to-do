@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan, faThumbTack
 } from "@fortawesome/free-solid-svg-icons";
 
 const Task = () => {
+
+  useEffect(() => {
+const fetchTasks = async () => {
+  const response = await fetch('')
+  const json = await response.json()
+
+  if(response.ok){
+    
+  }
+
+}
+  }, [])
   return (
     <div className="relative  mt-6 pl-2 pt-1 pb-2  bg-slate-300 w-[650px] rounded-md">
       <label className=" relative flex space-x-3 items-center overlaycontainer ">
