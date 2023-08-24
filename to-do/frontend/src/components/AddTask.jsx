@@ -38,7 +38,7 @@ if (response.ok) {
     <div className=" mt-10 pl-4 w-[300px pb-5">
       <h1 className="  text-[22px] font-bold pb-4">Add Task</h1>
       <form className=" pb-9 flex flex-col" onSubmit={handleSubmit}>
-        <label className="">
+        <div className="">
           <p className=" text-[16px] pb-1 font-semibold">Title:</p>
           <input
             type="text"
@@ -47,25 +47,26 @@ if (response.ok) {
             required
             onChange={(e) => setTitle(e.target.valu)}
           />
-        </label>
-        <label className="">
+        </div>
+        <div className="">
           <p className=" text-[16px] pb-1 font-semibold">Type:</p>
+
+          {/* <input
+            type="text"
+            value={type}
+            placeholder=""
+            className=" mb-5 "
+            required
+            onChange={(e) => setType(e.target.value)}
+          /> */}
           <select className=" w-[184px]">
-            <input
-              type="text"
-              value={type}
-              placeholder=""
-              className=" mb-5 "
-              required
-              onChange={(e) => setType(e.target.value)}
-            />
             <option value="personal">Work</option>
             <option value="personal">Groceries</option>
             <option value="personal">Shopping</option>
             <option value="personal">Personal</option>
           </select>
-        </label>
-        <label className="mt-4">
+        </div>
+        <div className="mt-4">
           <p className=" text-[16px] pb-1 font-semibold">Due Date:</p>
           <input
             type="date"
@@ -73,8 +74,8 @@ if (response.ok) {
             className="  mb-5 w-[184px]"
             onChange={(e) => setDate(e.target.value)}
           />
-        </label>
-        <label className="">
+        </div>
+        <div className="">
           <p className=" text-[16px] pb-1 font-semibold">Time:</p>
           <input
             type="time"
@@ -82,7 +83,7 @@ if (response.ok) {
             className="w-[184px] mb-8"
             onChange={(e) => setTime(e.target.value)}
           />
-        </label>
+        </div>
         <input
           type="submit"
           value="Add Task"
