@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const AddTask = () => {
-  const [title, setTitle] = useState("");
-  const [type, setType] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [title, setTitle] = useState('');
+  const [type, setType] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
     const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -45,7 +45,7 @@ if (response.ok) {
             value={title}
             className=" mb-5"
             required
-            onChange={(e) => setTitle(e.target.valu)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="">
