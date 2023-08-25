@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useTasksContext } from "../hooks/useTasksContext";
 
 const AddTask = () => {
+  const { dispatch} = useTasksContext()
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
   const [date, setDate] = useState('');
@@ -31,6 +33,7 @@ if (response.ok) {
   setDate("");
   setTime("")
   console.log("new Task added:", json);
+  dispatch({type: 'CREATE_TASK', payload: json});
 }
 
   }
@@ -58,11 +61,16 @@ if (response.ok) {
             className=" mb-5 "
             required
             onChange={(e) => setType(e.target.value)}
-          /> */}
-          <select className=" w-[184px]">
-            <option value="personal">Work</option>
-            <option value="personal">Groceries</option>
-            <option value="personal">Shopping</option>
+          />  */}
+          <select
+            className=" w-[184px]"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            required
+          >
+            <option value="work">Work</option>
+            <option value="groceries">Groceries</option>
+            <option value="shopping">Shopping</option>
             <option value="personal">Personal</option>
           </select>
         </div>

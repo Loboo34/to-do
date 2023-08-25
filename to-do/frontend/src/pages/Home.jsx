@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Task from '../components/Task'
 import Sidebar from '../components/Sidebar'
 import AddTask from '../components/AddTask'
+import { useTasksContext } from '../hooks/useTasksContext'
 
 
 const Home = () => {
-const [tasks, setTasks] = useState(null);
+const {tasks, dispatch} = useTasksContext()
 
     useEffect(() => {
       const fetchTasks = async () => {
@@ -14,11 +15,11 @@ const [tasks, setTasks] = useState(null);
         const json = await response.json();
 
         if (response.ok) {
-          setTasks(json);
+         dispatch({type: 'SET_TASKS', payload: json})
         }
       };
       fetchTasks();
-    }, []);
+    }, [dispatch]);
   return (
     <div className=" bg-slate-200">
       <Navbar />
