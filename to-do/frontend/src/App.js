@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home'
 import Singup from './pages/Singup';
 import Login from './pages/Login';
+import TaskType from './pages/TaskType';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<Home />} />
       <Route path='signup' element={<Singup />} />
       <Route path='signin' element={<Login />} />
+      <Route path='type/:type' element={<TaskType />} />
     </Route>
   )
 )

@@ -1,7 +1,27 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarWeek, faTasks, faArrowAltCircleDown, faThumbTack } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 const Sidebar = () => {
+
+  const typeData = [
+    {
+      name: "Personal",
+      path: "/personal",
+    },
+    {
+      name: "Work",
+      path: "/work",
+    },
+    {
+      name: "Shopping",
+      path: "/shopping",
+    },
+    {
+      name: "Groceries",
+      path: "/groceries",
+    },
+  ];
   return (
     <div className=" h-screen bg-slate-100 pt-4 pl-4 text-left w-[200px]">
       <div className=" flex pb-10 items-center space-x-2">
@@ -31,20 +51,18 @@ const Sidebar = () => {
       </div>
       <div className=" pb-8">
         <h1 className="pb-3 text-[22px] text-blue-600 font-bold">My lists</h1>
-        <p className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer">
-          Personal
-        </p>
-        <p className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer">
-          Work
-        </p>
-        <p className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer">
-          Groceries
-        </p>
-        <p className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer">
-          Shopping
-        </p>
+        <div>
+          {typeData.map((tasktype) => (
+            <Link to={`/type/${tasktype.name}`}>
+              <p className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer">
+                {tasktype.name}
+              </p>
+            </Link>
+          ))}
+        </div>
+       
       </div>
-      <div className=' flex items-center space-x-2'>
+      <div className=" flex items-center space-x-2">
         <p>Pinned</p>
         <FontAwesomeIcon
           icon={faThumbTack}
