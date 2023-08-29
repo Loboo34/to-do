@@ -20,6 +20,8 @@ const {tasks, dispatch} = useTasksContext()
       };
       fetchTasks();
     }, [dispatch]);
+
+   // const date = new Date()
   return (
     <div className=" bg-slate-200">
       <Navbar />

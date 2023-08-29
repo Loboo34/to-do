@@ -1,5 +1,5 @@
 const express = require("express");
-const { addTask, getTasks, getTask} = require("../controlers/tasksControlers")
+const { addTask, getTasks, getTask, deleteTask} = require("../controlers/tasksControlers")
 
 const router = express.Router();
 
@@ -13,8 +13,6 @@ router.get("/:id", getTask);
 router.post("/", addTask);
 
 //delete task
-router.delete("/:id", (req, res) => {
-    res.json({ mssg: "come get some" });
-});
+router.delete("/:id", deleteTask);
 
 module.exports = router;
