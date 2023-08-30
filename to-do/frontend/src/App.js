@@ -11,6 +11,7 @@ import Singup from './pages/Singup';
 import Login from './pages/Login';
 import TaskType from './pages/TaskType';
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <div className=" ">
+    
        <RouterProvider router={router} />
     </div>
   );

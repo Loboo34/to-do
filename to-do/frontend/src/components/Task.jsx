@@ -23,7 +23,7 @@ const Task = ({ task }) => {
           <input type="radio" className=" rounded-full " />
           <div className=" items-center">
             <p className=" text-slate-500">
-              {task.type}:{task.title}
+              my list:{task.type}
             </p>
             <h1 className=" text-[22px]">{task.title}</h1>
           </div>

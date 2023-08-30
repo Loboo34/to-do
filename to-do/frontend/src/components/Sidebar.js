@@ -18,7 +18,7 @@ const Sidebar = () => {
       path: "/shopping",
     },
     {
-      name: "Groceries",
+      name: "Grocery List",
       path: "/groceries",
     },
   ];
@@ -46,7 +46,9 @@ const Sidebar = () => {
         <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
           {" "}
           <FontAwesomeIcon icon={faTasks} />
-          <p className=" hover:text-blue-600 cursor-pointer">All Tasks</p>
+          <Link to={"/"}>
+            <p className=" hover:text-blue-600 cursor-pointer">All Tasks</p>
+          </Link>
         </div>
       </div>
       <div className=" pb-8">
@@ -60,7 +62,6 @@ const Sidebar = () => {
             </Link>
           ))}
         </div>
-       
       </div>
       <div className=" flex items-center space-x-2">
         <p>Pinned</p>
