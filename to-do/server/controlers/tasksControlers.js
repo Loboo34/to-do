@@ -26,7 +26,21 @@ const getTask = async (req, res) => {
 };
 
 //get tasks by type
+const filterByType = async (req, res) => {
+  const type = req.query.type;
 
+  if(!type) {
+    res.status(404).json({message: 'type param required'})
+  }
+
+  try {
+    const filteredTasks = await Tasks.find({ type });
+    res.json({ tasks: filteredTasks });
+  } catch (error) {
+    console.error(error);
+    res.status(404).json({ error: "internal error" });
+  }
+};
 
 //add task
 const addTask = async (req, res) => {
@@ -78,5 +92,5 @@ module.exports = {
   getTask,
   addTask,
   deleteTask,
- 
+  filterByType,
 };
