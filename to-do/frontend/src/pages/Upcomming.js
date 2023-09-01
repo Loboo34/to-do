@@ -1,28 +1,26 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import Sidebar from '../components/Sidebar';
-import Navbar from '../components/Navbar';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 import Task from "../components/Task";
 import AddTask from "../components/AddTask";
 import { useTasksContext } from "../hooks/useTasksContext";
 
-const TaskType = () => {
-    const { type } = useParams();
-    const { tasks, dispatch } = useTasksContext();
+const Upcomming = () => {
+  const { type } = useParams();
+  const { tasks, dispatch } = useTasksContext();
 
-    useEffect(() => {
-      const fetchTasks = async () => {
-        const response = await fetch("/api/tasks/");
-        const json = await response.json();
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await fetch("/api/tasks/");
+      const json = await response.json();
 
-        if (response.ok) {
-          dispatch({ type: "SET_TASKS", payload: json });
-        }
-      };
-      fetchTasks();
-    }, [dispatch]);
-
-    const truncatedData = tasks.slice(0, 2);
+      if (response.ok) {
+        dispatch({ type: "SET_TASKS", payload: json });
+      }
+    };
+    fetchTasks();
+  }, [dispatch]);
   return (
     <div className=" bg-slate-200">
       <Navbar />
@@ -39,8 +37,7 @@ const TaskType = () => {
             <div className=" flex flex-col leading-5 pt-4">{type}</div>
           </div>
 
-          {truncatedData &&
-            truncatedData.map((task) => <Task key={task._id} task={task} />)}
+          {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
         </div>
         <div className=" w-3/12 max-md:hidden">
           <AddTask />
@@ -48,6 +45,6 @@ const TaskType = () => {
       </div>
     </div>
   );
-}
+};
 
-export default TaskType
+export default Upcomming;

@@ -14,7 +14,7 @@ const Sidebar = () => {
       path: "/work",
     },
     {
-      name: "Shopping",
+      name: "Shopping List",
       path: "/shopping",
     },
     {
@@ -35,19 +35,21 @@ const Sidebar = () => {
       <div className="  pb-8">
         <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
           {" "}
+          <FontAwesomeIcon icon={faTasks} />
+          <Link to={"/"}>
+            <p className=" hover:text-blue-600 cursor-pointer">All Tasks</p>
+          </Link>
+        </div>
+        <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
+          {" "}
           <FontAwesomeIcon icon={faArrowAltCircleDown} />
           <p className=" hover:text-blue-600 cursor-pointer">Today</p>
         </div>
         <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
           {" "}
           <FontAwesomeIcon icon={faCalendarWeek} />
-          <p className=" hover:text-blue-600 cursor-pointer">This Week</p>
-        </div>
-        <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
-          {" "}
-          <FontAwesomeIcon icon={faTasks} />
-          <Link to={"/"}>
-            <p className=" hover:text-blue-600 cursor-pointer">All Tasks</p>
+          <Link to={"upcomming"}>
+            <p className=" hover:text-blue-600 cursor-pointer">Upcomming</p>
           </Link>
         </div>
       </div>
