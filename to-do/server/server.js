@@ -1,8 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-const mongose = require("mongoose");
+const mongoose = require("mongoose");
 const taskRoutes = require("./routes/tasks");
-const { default: mongoose } = require("mongoose");
+const userRoutes = require("./routes/User");
+
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/api/tasks", taskRoutes);
+app.use("/api/user", userRoutes);
+
 
 //db
 mongoose

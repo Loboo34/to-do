@@ -6,11 +6,13 @@ const [name, setName] = useState('')
 const [email, setEmail] = useState('')
 const [Password, setPassword] = useState('')
 
+const handleSubmit = async () =>{}
+
   return (
     <div className=" flex justify-center items-center bg-[#0000ffa0] h-screen ">
       <div className=" relative w-[500px]  bg-[black] text-white flex flex-col justify-center items-center pt-10 pb-10  rounded-md">
         <h1 className=" text-center text-[22px] pb-4">Create Account</h1>
-        <form className="  w-[80%] ">
+        <form className="  w-[80%] " onSubmit={handleSubmit}>
           <div className=" w-[100%]">
             <div className=" pb-2 justify-center flex flex-col h-[70px]">
               <label className=" text-[20px] pb-1">Name</label>
