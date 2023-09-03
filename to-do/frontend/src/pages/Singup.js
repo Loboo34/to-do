@@ -1,12 +1,48 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Singup = () => {
 const [name, setName] = useState('')
 const [email, setEmail] = useState('')
-const [Password, setPassword] = useState('')
+const [password, setPassword] = useState('')
 
-const handleSubmit = async () =>{}
+ const { dispatch } = useAuthContext();
+ const [error, setError] = useState(null);
+ const [isLoading, setIsLoading] = useState(null);
+
+ const Singup = async (name, email, password)=> {
+  setIsLoading(true)
+  setError(null)
+
+  const response = await fetch('/api/user/singup', {
+    method: 'POST',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify({name, email, password})
+  });
+
+  const json = await response.json();
+
+   if (!response.ok) {
+     setIsLoading(false);
+     setError(json.error);
+   }
+   if (response.ok) {
+     //save user to local storage
+     localStorage.setItem("user", JSON.stringify(json));
+
+     //update
+     dispatch({ type: "SINGIN", payload: json });
+     setIsLoading(false);
+   }
+ }
+
+const handleSubmit = async (e) =>{
+  e.preventDefault();
+ 
+  await Singup(name, email, password);
+
+}
 
   return (
     <div className=" flex justify-center items-center bg-[#0000ffa0] h-screen ">
@@ -41,7 +77,7 @@ const handleSubmit = async () =>{}
               <label className=" text-[20px] pb-1">Password</label>
               <input
                 type="password"
-                value={Password}
+                value={password}
                 id="password"
                 className=" w-full h-[50%]  mr-2 text-black"
                 required
@@ -49,7 +85,7 @@ const handleSubmit = async () =>{}
               />
             </div>
             <div className=" text-white bg-blue-600 text-center flex items-center justify-center h-[30px] mt-8 font-bold">
-              <input type="submit" value="Sing up" />
+              <input type="submit" value="Sing up" disabled={isLoading} />
             </div>
           </div>
           <div className=" flex space-x-3 mt-3">
@@ -58,6 +94,7 @@ const handleSubmit = async () =>{}
               <p className="text-blue-600">Sing in</p>
             </Link>
           </div>
+          {error && <div className=" text-red-800">{error}</div>}
         </form>
       </div>
     </div>

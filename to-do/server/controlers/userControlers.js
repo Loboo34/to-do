@@ -1,27 +1,39 @@
 const User = require("../models/Usermodels");
-
+const jwt = require('jsonwebtoken')
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "2d" });
+};
 //singin
 const singinUser = async (req, res) => {
-  res.json({mssg: 'singed in'})
-}
+  //res.json({ mssg: "singed in" });
+  const { name, email, password } = req.body;
 
+  try {
+    const user = await User.singin(name, email, password);
+     const token = createToken(user._id);
+
+    res.status(200).json({ name, email, token });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
 
 //sing up
 
 const singupUser = async (req, res) => {
-res.json({mssg: 'singed up'})
-  // const { name, email, password } = req.body;
+  //res.json({mssg: 'singed up'})
+  const { name, email, password } = req.body;
 
-  //  try {
-  //   const user = await User.signupUser(name, email, password);
+  try {
+    const user = await User.singup(name, email, password);
 
-  //   //create token
-  //   //const token = createToken(user._id);
+    //create token
+    const token = createToken(user._id);
 
-  //   res.status(200).json({ name, email, user});
-  // } catch (error) {
-  //   res.status(400).json({ error: "user not created" });
-  // }
+    res.status(200).json({ name, email, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
-module.exports = {singupUser, singinUser}
+module.exports = { singupUser, singinUser };
