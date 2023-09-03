@@ -1,16 +1,53 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Singup = () => {
-const [name, setName] = useState('')
-const [email, setEmail] = useState('')
-const [Password, setPassword] = useState('')
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { dispatch } = useAuthContext();
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+
+  const Singup = async (name, email, password) => {
+    setIsLoading(true);
+    setError(null);
+
+    const response = await fetch("/api/user/singup", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(json.error);
+    }
+    if (response.ok) {
+      //save user to local storage
+      localStorage.setItem("user", JSON.stringify(json));
+
+      //update
+      dispatch({ type: "LOGIN", payload: json });
+      setIsLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await Singup(name, email, password);
+  };
 
   return (
     <div className=" flex justify-center items-center bg-[#0000ffa0] h-screen ">
       <div className=" relative w-[500px]  bg-[black] text-white flex flex-col justify-center items-center pt-10 pb-10  rounded-md">
         <h1 className=" text-center text-[22px] pb-4">Create Account</h1>
-        <form className="  w-[80%] ">
+        <form className="  w-[80%] " onSubmit={handleSubmit}>
           <div className=" w-[100%]">
             <div className=" pb-2 justify-center flex flex-col h-[70px]">
               <label className=" text-[20px] pb-1">Name</label>
@@ -39,7 +76,7 @@ const [Password, setPassword] = useState('')
               <label className=" text-[20px] pb-1">Password</label>
               <input
                 type="password"
-                value={Password}
+                value={password}
                 id="password"
                 className=" w-full h-[50%]  mr-2 text-black"
                 required
@@ -47,7 +84,7 @@ const [Password, setPassword] = useState('')
               />
             </div>
             <div className=" text-white bg-blue-600 text-center flex items-center justify-center h-[30px] mt-8 font-bold">
-              <input type="submit" value="Sing up" />
+              <input type="submit" value="Sing up" disabled={isLoading} />
             </div>
           </div>
           <div className=" flex space-x-3 mt-3">
@@ -56,10 +93,11 @@ const [Password, setPassword] = useState('')
               <p className="text-blue-600">Sing in</p>
             </Link>
           </div>
+          {error && <div className=" text-red-800">{error}</div>}
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default Singup
+export default Singup;

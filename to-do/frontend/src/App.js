@@ -8,7 +8,7 @@ import {
 
 import Home from './pages/Home'
 import Singup from './pages/Singup';
-import Login from './pages/Login';
+import Login from './pages/Singin';
 import TaskType from './pages/TaskType';
 import Upcomming from './pages/Upcomming';
 

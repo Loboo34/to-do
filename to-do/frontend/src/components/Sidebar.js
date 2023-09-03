@@ -2,8 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarWeek, faTasks, faArrowAltCircleDown, faThumbTack } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 const Sidebar = () => {
-
+const { user} = useAuthContext()
   const typeData = [
     {
       name: "Personal",
@@ -27,8 +28,8 @@ const Sidebar = () => {
       <div className=" flex pb-10 items-center space-x-2">
         <img src="/img/prof.png" alt="pic" className=" w-10" />
         <div>
-          <h1>Name</h1>
-          <p>name@gmail.com</p>
+          <h1>{user.name}</h1>
+          <p>{user.email}</p>
         </div>
       </div>
 
