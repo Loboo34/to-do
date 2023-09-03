@@ -55,7 +55,17 @@ const Home = () => {
           </div>
         </div>
       )}
-      {!user && <div className=" text-black">welcome</div>}
+      {!user && (
+        <div className=" text-black w-full h-screen flex justify-center ">
+          <div className=" pt-[100px]">
+            <h1 className=" text-[40px]"> Organize your Work and Life</h1>
+            <p>Unleash Your Productivity Potential with to-do</p>
+            <div className=" flex justify-center">
+              <button>Start Today</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

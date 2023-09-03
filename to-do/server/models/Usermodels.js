@@ -44,7 +44,7 @@ userSchema.statics.singup = async function (name, email, password) {
 //singin 
 userSchema.statics.singin = async function ( email, password) {
     if(!email || !password) {
-        throw Error('All fields must be filled')
+        throw Error('All fields  be filled')
     }
 const user = await this.findOne({ email})
 

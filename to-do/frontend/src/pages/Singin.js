@@ -33,7 +33,7 @@ const Singin = () => {
     localStorage.setItem("user", JSON.stringify(json));
 
     //update
-    dispatch({ type: "SINGIN", payload: json });
+    dispatch({ type: "LOGIN", payload: json });
     setIsLoading(false);
   }
 

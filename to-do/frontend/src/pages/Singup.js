@@ -1,48 +1,47 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const Singup = () => {
-const [name, setName] = useState('')
-const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
- const { dispatch } = useAuthContext();
- const [error, setError] = useState(null);
- const [isLoading, setIsLoading] = useState(null);
+  const { dispatch } = useAuthContext();
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
- const Singup = async (name, email, password)=> {
-  setIsLoading(true)
-  setError(null)
+  const Singup = async (name, email, password) => {
+    setIsLoading(true);
+    setError(null);
 
-  const response = await fetch('/api/user/singup', {
-    method: 'POST',
-    headers: {'content-type': 'application/json'},
-    body: JSON.stringify({name, email, password})
-  });
+    const response = await fetch("/api/user/singup", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-  const json = await response.json();
+    const json = await response.json();
 
-   if (!response.ok) {
-     setIsLoading(false);
-     setError(json.error);
-   }
-   if (response.ok) {
-     //save user to local storage
-     localStorage.setItem("user", JSON.stringify(json));
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(json.error);
+    }
+    if (response.ok) {
+      //save user to local storage
+      localStorage.setItem("user", JSON.stringify(json));
 
-     //update
-     dispatch({ type: "SINGIN", payload: json });
-     setIsLoading(false);
-   }
- }
+      //update
+      dispatch({ type: "LOGIN", payload: json });
+      setIsLoading(false);
+    }
+  };
 
-const handleSubmit = async (e) =>{
-  e.preventDefault();
- 
-  await Singup(name, email, password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-}
+    await Singup(name, email, password);
+  };
 
   return (
     <div className=" flex justify-center items-center bg-[#0000ffa0] h-screen ">
@@ -99,6 +98,6 @@ const handleSubmit = async (e) =>{
       </div>
     </div>
   );
-}
+};
 
-export default Singup
+export default Singup;
