@@ -24,6 +24,7 @@ const Home = () => {
   }, [dispatch]);
 
   // const date = new Date()
+
   return (
     <div className=" bg-slate-200">
       <Navbar />
@@ -57,13 +58,101 @@ const Home = () => {
       )}
       {!user && (
         <div className=" text-black w-full h-screen flex justify-center ">
-          <div className=" pt-[100px]">
-            <h1 className=" text-[40px]"> Organize your Work and Life</h1>
-            <p>Unleash Your Productivity Potential with to-do</p>
+          <svg class="w-full h-full" viewBox="">
+            <defs>
+              <pattern
+                id="bg_pattern"
+                width="100"
+                height="100"
+                patternUnits="userSpaceOnUse"
+              >
+                <circle
+                  cx="0.5"
+                  cy="0.5"
+                  r="16"
+                  stroke="#101011"
+                  stroke-width="6"
+                  fill="none"
+                  opacity="1"
+                ></circle>
+                <line
+                  x1="35"
+                  y1="35"
+                  x2="65"
+                  y2="65"
+                  stroke="#000095"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                  opacity="1"
+                ></line>{" "}
+                <line
+                  x1="35"
+                  y1="65"
+                  x2="65"
+                  y2="35"
+                  stroke="#000095"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                  opacity="1"
+                ></line>
+                <circle
+                  cx="100.5"
+                  cy="0.5"
+                  r="16"
+                  stroke="#101011"
+                  stroke-width="6"
+                  fill="none"
+                  opacity="1"
+                ></circle>
+                <circle
+                  cx="0.5"
+                  cy="100.5"
+                  r="16"
+                  stroke="#101011"
+                  stroke-width="6"
+                  fill="none"
+                  opacity="1"
+                ></circle>
+                <circle
+                  cx="100.5"
+                  cy="100.5"
+                  r="16"
+                  stroke="#101011"
+                  stroke-width="6"
+                  fill="none"
+                  opacity="1"
+                ></circle>
+              </pattern>
+            </defs>
+            <rect
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              fill="#000000"
+              opacity="1"
+            ></rect>
+            <rect
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              fill="url(#bg_pattern)"
+              opacity="1"
+            ></rect>
+          </svg>
+          <div className=" pt-[100px] z-10 absolute text-white">
+            <h1 className=" text-[40px] pb-2 "> Organize your Work and Life</h1>
+            <p className=" text-center pb-4">
+              Unleash Your Productivity Potential with to-do
+            </p>
             <div className=" flex justify-center">
-              <button>Start Today</button>
+              <button className=" bg-blue-700 text-white homebtn">
+                Start Today
+              </button>
             </div>
           </div>
+          <div></div>
         </div>
       )}
     </div>
