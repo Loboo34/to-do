@@ -17,7 +17,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative bg-blue-600 text-white pt-2 pb-2  flex space-x-3 items-center">
+    <div className="relative  text-white pt-2 pb-2  flex space-x-3 items-center" >
+
       <FontAwesomeIcon
         icon={faCheck}
         className=" text-blue-600 bg-white rounded-full ml-4 pt-1 pb-1 pl-1 pr-1 text-[25px]"
@@ -25,10 +26,15 @@ const Navbar = () => {
       <h1 className="text-[25px]">To Do</h1>
       {user && (
         <div className="flex absolute right-0 pr-4 space-x-5 items-center">
-          <h1 className=" text-white cursor-pointer" onClick={handleSingout}>
+          <h1 className=" text-white cursor-pointer hidden" onClick={handleSingout}>
             log out
           </h1>
-          <h1 className=" text-white">{user.name}</h1>
+          <div className=" flex  items-center space-x-2">
+            <img src="/img/prof.png" alt="pic" className=" w-10" />
+            <div>
+              <h1 className=" hidden">{user.name}</h1>
+            </div>
+          </div>
         </div>
       )}
       {!user && (

@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <div className=" bg-slate-200">
-      <Navbar />
+  
       {user && (
         <div className=" flex w-full">
           <div className=" md:w-2/12 mr-8 max-md:hidden">
