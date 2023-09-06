@@ -30,10 +30,10 @@ const Home = () => {
   
       {user && (
         <div className=" flex w-full">
-          <div className=" md:w-2/12 mr-8 max-md:hidden">
+          <div className=" mr-8 max-md:hidden">
             <Sidebar />
           </div>
-          <div className=" w-7/12 ">
+          <div className=" pr-[90px] ">
             <h1 className=" text-blue-700 text-[22px] pt-5">
               Good morning {user.name}
             </h1>
@@ -52,7 +52,7 @@ const Home = () => {
             {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
           </div>
           <div className=" w-3/12 max-md:hidden">
-            <AddTask />
+            {/* <AddTask /> */}
           </div>
         </div>
       )}

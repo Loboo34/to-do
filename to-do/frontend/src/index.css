@@ -34,3 +34,23 @@
 .blobsvg{
   
 }
+.slider{
+-webkit-transition: .4s;
+  transition: .4s;
+}
+.slider::before{
+   content: "  ";
+   -webkit-transition: .4s;
+  transition: .4s;
+}
+.toggle:checked + .slider {
+   background-color: brown;
+}
+.toggle:focus + .slider {
+   box-shadow: 0 0 1px #2196F3;
+}
+.toggle:checked + .slider::before {
+   -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
