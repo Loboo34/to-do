@@ -51,14 +51,15 @@ const Sidebar = () => {
 
   return (
     <div
-      className=" h-[100vh] bg-slate-100 pt-4 pl-3 pr-2 text-left w-[230px] transition-all duration-[0.5s] ease-in-out"
+      className=" h-[100vh] bg-slate-100 pt-4 pl-3 pr-2 text-left w-[230px] transition-all duration-[0.5s]"
       style={{ width: isOpen ? "200px" : "60px" }}
     >
-      <div className="mb-3">
+      <div className="mb-3 flex">
         <FaHome
           onClick={toggle}
           className=" text-[22px] w-[40px] h-[30px] pb-1 pt-1 rounded-md hover:bg-slate-400 "
         />
+        {/* <h1 style={{display : isOpen ? "block" : "none"}}>Home</h1> */}
       </div>
 
       <div className="  pb-3">
@@ -81,17 +82,17 @@ const Sidebar = () => {
             <p className=" hover:text-blue-600 cursor-pointer">Upcomming</p>
           </Link>
         </div> */}
-        {menuItems.map((item) => (
-          <NavLink className=" flex space-x-1 pb-3 ">
+        {menuItems.map((item, key) => (
+          <NavLink className=" flex space-x-1 pb-3 " key={key}>
             <div
               className=" mb-2 flex justify-center items-center text-[20px] w-[40px] h-[30px] rounded-md hover:bg-slate-400"
-              activeclassName="active"
+              activeclassname="active"
             >
               {item.icon}
             </div>
             <div
               style={{ display: isOpen ? "block" : "none" }}
-              className=" hover:text-blue-700 pt-1"
+              className=" hover:text-blue-700 flex gap-[15px] transition-all duration-[o.5s]" 
             >
               {item.name}
             </div>
@@ -131,11 +132,11 @@ const Sidebar = () => {
         </div>
         {isActive && (
           <div className=" transition duration-[10s] ">
-            {typeData.map((tasktype) => (
+            {typeData.map((tasktype, key) => (
               <Link to={`/type/${tasktype.name}`}>
                 <p
                   className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer"
-                  style={{ display: isOpen ? "block" : "none" }}
+                  style={{ display: isOpen ? "block" : "none" }} key={key}
                 >
                   {tasktype.name}
                 </p>

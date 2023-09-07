@@ -58,7 +58,7 @@ const Home = () => {
       )}
       {!user && (
         <div className=" text-black w-full h-screen flex justify-center ">
-          <svg class="w-full h-full" viewBox="">
+          <svg className="w-full h-full">
             <defs>
               <pattern
                 id="bg_pattern"
@@ -71,7 +71,7 @@ const Home = () => {
                   cy="0.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
@@ -81,8 +81,8 @@ const Home = () => {
                   x2="65"
                   y2="65"
                   stroke="#000095"
-                  stroke-width="6"
-                  stroke-linecap="round"
+                  strokeWidth="6"
+                  strokeLinecap="round"
                   opacity="1"
                 ></line>{" "}
                 <line
@@ -91,8 +91,8 @@ const Home = () => {
                   x2="65"
                   y2="35"
                   stroke="#000095"
-                  stroke-width="6"
-                  stroke-linecap="round"
+                  strokeWidth="6"
+                  strokeLinecap="round"
                   opacity="1"
                 ></line>
                 <circle
@@ -100,7 +100,7 @@ const Home = () => {
                   cy="0.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
@@ -109,7 +109,7 @@ const Home = () => {
                   cy="100.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
@@ -118,7 +118,7 @@ const Home = () => {
                   cy="100.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
