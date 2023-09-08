@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-const Projects = () => {
-  return (
-    <div className=" bg-pink-500 flex justify-center items-center h-[100vh]">
-      <div className=" relative bg-slate-50 w-[500px] h-[350px] pt-3 pl-4">
+const Popup = (props) => {
+  return (props.trigger) ? (
+    <div className=" bg-[#00000046] fixed top-0 left-0 z-10 flex justify-center items-center w-[100%] h-[100vh] pl-0">
+      <div className=" relative bg-slate-50 w-[100%] max-w-[500px] h-[350px] pt-3 pl-4">
         <h1 className=" text-2xl font-black pb-4">Add List</h1>
         <form className=" flex flex-col">
           <label className=" font-bold pb-2 text-lg">Name</label>
@@ -31,7 +31,7 @@ const Projects = () => {
             <input
               type="submit"
               value="Cancle"
-              className=" text-[18px] hover:bg-slate-300 pl-2 pr-2 rounded-md"
+              className=" text-[18px] hover:bg-slate-300 pl-2 pr-2 rounded-md" onClick={() =>props.setTrigger(false)}
             />
             <input
               type="submit"
@@ -42,7 +42,7 @@ const Projects = () => {
         </form>
       </div>
     </div>
-  );
-};
+  ) : "";
+}
 
-export default Projects;
+export default Popup

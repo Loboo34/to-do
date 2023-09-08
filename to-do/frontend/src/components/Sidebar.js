@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faGreaterThan } from "@fortawesome/free-solid-svg-icons";
 import { FaTh, FaList, FaHome, FaCalendar, FaThList } from "react-icons/fa";
 import { Link, NavLink } from 'react-router-dom';
+import Popup from './Popup';
 //import { useAuthContext } from '../hooks/useAuthContext';
 const Sidebar = () => {
 //const { user} = useAuthContext()
@@ -47,6 +48,7 @@ const Sidebar = () => {
 
   const [isOpen, setIsOpen] = useState()
   const [isActive, setIsActive] = useState(false)
+  const [btnPopup, setBtnPopup] = useState(false)
    const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -117,12 +119,11 @@ const Sidebar = () => {
             style={{ display: isOpen ? "block" : "none" }}
           >
             {" "}
-            <Link to={"projects"}>
               <FontAwesomeIcon
                 icon={faPlus}
-                className=" p-2 transition ease-out hover:scale-110 hover:bg-slate-400 rounded-md"
+                className=" p-2 transition ease-out hover:scale-110 hover:bg-slate-400 rounded-md" onClick={() => setBtnPopup(true)}
               />
-            </Link>
+              <Popup trigger={btnPopup} setTrigger={setBtnPopup}/>
             <FontAwesomeIcon
               icon={faGreaterThan}
               className=" pt-2 pb-2 pr-2 pl-2 rotate-90 transition ease-out hover:scale-110 bg-slate-400 rounded-md"

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Task from "../components/Task";
-import AddTask from "../components/AddTask";
+
 import { useTasksContext } from "../hooks/useTasksContext";
 
 const Upcomming = () => {
@@ -40,7 +40,7 @@ const Upcomming = () => {
           {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
         </div>
         <div className=" w-3/12 max-md:hidden">
-          <AddTask />
+         
         </div>
       </div>
     </div>

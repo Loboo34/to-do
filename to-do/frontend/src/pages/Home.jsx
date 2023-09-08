@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Task from "../components/Task";
 import Sidebar from "../components/Sidebar";
-import AddTask from "../components/AddTask";
 import { useTasksContext } from "../hooks/useTasksContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Addtasks from "../components/Addtasks";
+
 
 const Home = () => {
   const { user } = useAuthContext();
@@ -27,13 +28,12 @@ const Home = () => {
 
   return (
     <div className=" bg-slate-200">
-  
       {user && (
         <div className=" flex w-full">
           <div className=" mr-8 max-md:hidden">
             <Sidebar />
           </div>
-          <div className=" pr-[90px] ">
+          <div className=" w-[100%] ">
             <h1 className=" text-blue-700 text-[22px] pt-5">
               Good morning {user.name}
             </h1>
@@ -50,9 +50,9 @@ const Home = () => {
             </div>
 
             {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
-          </div>
-          <div className=" w-3/12 max-md:hidden">
-            {/* <AddTask /> */}
+            <div className=" pt-4">
+              <Addtasks />
+            </div>
           </div>
         </div>
       )}
