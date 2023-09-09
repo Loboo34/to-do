@@ -65,7 +65,7 @@
 }
 
 .switch input[type="checkbox"]:checked + .slider {
-  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, #22cc3f 0px 0px 0px 2px inset, rgb(96, 117, 251) 0px 0px 0px 24px inset,
+  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, rgb(96, 117, 251) 0px 0px 0px 2px inset, rgb(96, 117, 251) 0px 0px 0px 24px inset,
         rgba(224, 224, 224, 0.45) 0px 1px 0px 0px;
 }
 
@@ -75,4 +75,16 @@
 
 .switch input[type="checkbox"] {
   display: none;
+}
+
+.dots, .info{
+  display: none;
+  
+}
+.list:hover .dots:hover .info{
+display: block;
+}
+.list:hover .dots {
+  display: block;
+  transition: 9s ease;
 }

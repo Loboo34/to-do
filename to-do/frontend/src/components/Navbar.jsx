@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faSearch, faPlus, faBell } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuthContext } from "../hooks/useAuthContext";
+import Addtasks from "./Addtasks";
 const Navbar = () => {
+  const [taskPopup, setTaskPopup] = useState(false);
   const { user, dispatch } = useAuthContext();
 
   const singOut = () => {
@@ -17,16 +19,32 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative  text-white pt-2 pb-2  flex space-x-3 items-center" >
-
+    <div className="relative  text-white pt-2 pb-2 bg-blue-700    flex space-x-3 items-center">
       <FontAwesomeIcon
         icon={faCheck}
         className=" text-blue-600 bg-white rounded-full ml-4 pt-1 pb-1 pl-1 pr-1 text-[25px]"
       />
       <h1 className="text-[25px]">To Do</h1>
+      <div>
+        <form>
+          <input type="search" placeholder="Search" className=" text-blue-700 hover:bg-white"/>
+        </form>
+      </div>
       {user && (
         <div className="flex absolute right-0 pr-4 space-x-5 items-center">
-          <h1 className=" text-white cursor-pointer hidden" onClick={handleSingout}>
+          <FontAwesomeIcon icon={faBell} />
+          <FontAwesomeIcon
+            icon={faPlus}
+            className=" text-xl"
+            onClick={() => setTaskPopup(true)}
+          />
+          <div className=" flex flex-col items-center justify-center fixed ">
+            <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
+          </div>
+          <h1
+            className=" text-white cursor-pointer hidden"
+            onClick={handleSingout}
+          >
             log out
           </h1>
           <div className=" flex  items-center space-x-2">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faGreaterThan } from "@fortawesome/free-solid-svg-icons";
-import { FaTh, FaList, FaHome, FaCalendar, FaThList } from "react-icons/fa";
+import { faPlus, faGreaterThan, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { FaTh, FaList, FaHome, FaCalendar, FaThList,  } from "react-icons/fa";
 import { Link, NavLink } from 'react-router-dom';
 import Popup from './Popup';
 //import { useAuthContext } from '../hooks/useAuthContext';
@@ -94,7 +94,7 @@ const Sidebar = () => {
             </div>
             <div
               style={{ display: isOpen ? "block" : "none" }}
-              className=" hover:text-blue-700 flex gap-[15px] transition-all duration-[o.5s]" 
+              className=" hover:text-blue-700 flex gap-[15px] transition-all duration-[o.5s]"
             >
               {item.name}
             </div>
@@ -119,11 +119,12 @@ const Sidebar = () => {
             style={{ display: isOpen ? "block" : "none" }}
           >
             {" "}
-              <FontAwesomeIcon
-                icon={faPlus}
-                className=" p-2 transition ease-out hover:scale-110 hover:bg-slate-400 rounded-md" onClick={() => setBtnPopup(true)}
-              />
-              <Popup trigger={btnPopup} setTrigger={setBtnPopup}/>
+            <FontAwesomeIcon
+              icon={faPlus}
+              className=" p-2 transition ease-out hover:scale-110 hover:bg-slate-400 rounded-md"
+              onClick={() => setBtnPopup(true)}
+            />
+            <Popup trigger={btnPopup} setTrigger={setBtnPopup} />
             <FontAwesomeIcon
               icon={faGreaterThan}
               className=" pt-2 pb-2 pr-2 pl-2 rotate-90 transition ease-out hover:scale-110 bg-slate-400 rounded-md"
@@ -132,16 +133,24 @@ const Sidebar = () => {
           </div>
         </div>
         {isActive && (
-          <div className=" transition duration-[10s] ">
+          <div className="  ">
             {typeData.map((tasktype, key) => (
-              <Link to={`/type/${tasktype.name}`}>
-                <p
-                  className=" pb-2 text-[18px] hover:text-blue-600 cursor-pointer"
-                  style={{ display: isOpen ? "block" : "none" }} key={key}
-                >
-                  {tasktype.name}
-                </p>
-              </Link>
+              <div className=" flex pb-2 pl-1 space-x-2 items-center relative hover:bg-slate-300 rounded-sm list">
+                <Link to={`/type/${tasktype.name}`}>
+                  <p
+                    className="  text-[18px] hover:text-blue-600 cursor-pointer"
+                    style={{ display: isOpen ? "block" : "none" }}
+                    key={key}
+                  >
+                    {tasktype.name}
+                  </p>
+                </Link>
+                <FontAwesomeIcon
+                  icon={faEllipsis}
+                  className=" absolute text-slate-700 text-[20px] right-3 pt-1 z-10 dots"
+                />
+                <h1 className=' absolute z-10 info'>list actions</h1>
+              </div>
             ))}
           </div>
         )}

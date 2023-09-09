@@ -2,7 +2,7 @@ import React from 'react'
 
 const Popup = (props) => {
   return (props.trigger) ? (
-    <div className=" bg-[#00000046] fixed top-0 left-0 z-10 flex justify-center items-center w-[100%] h-[100vh] pl-0">
+    <div className=" bg-[#00000062] fixed top-0 left-0 z-10 flex justify-center items-center w-[100%] h-[100vh] pl-0">
       <div className=" relative bg-slate-50 w-[100%] max-w-[500px] h-[350px] pt-3 pl-4">
         <h1 className=" text-2xl font-black pb-4">Add List</h1>
         <form className=" flex flex-col">

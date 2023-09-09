@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Task from "../components/Task";
 import Sidebar from "../components/Sidebar";
@@ -6,9 +6,13 @@ import { useTasksContext } from "../hooks/useTasksContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Addtasks from "../components/Addtasks";
 
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Home = () => {
   const { user } = useAuthContext();
+  const [taskPopup, setTaskPopup] = useState(false)
 
   const { tasks, dispatch } = useTasksContext();
 
@@ -28,6 +32,7 @@ const Home = () => {
 
   return (
     <div className=" bg-slate-200">
+      <Navbar />
       {user && (
         <div className=" flex w-full">
           <div className=" mr-8 max-md:hidden">
@@ -50,8 +55,18 @@ const Home = () => {
             </div>
 
             {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
-            <div className=" pt-4">
-              <Addtasks />
+            <div className=" pt-4 pb-6">
+              <div
+                className="flex space-x-1 hover:text-blue-700 pb-2 "
+                onClick={() => setTaskPopup(true)}
+              >
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className=" text-blue-700 text-[12px] mt-1 hover:text-white  pl-1 pr-1 pb-1 pt-1 rounded-full hover:bg-blue-700"
+                />
+                <h1 className=" cursor-pointer">Add Task</h1>
+              </div>
+              <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
             </div>
           </div>
         </div>

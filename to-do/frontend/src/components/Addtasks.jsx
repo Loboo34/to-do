@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Action from './Action';
 
-const Addtasks = () => {
+const Addtasks = (props) => {
   const [isActive, setIsActive] = useState(false)
   
-  return (
+  return (props.trigger) ? (
     <div className=" relative bg-white w-[800px] pt-4 pl-3 pb-6 rounded-lg">
       <form>
         <div className=" flex flex-col w-[100%]">
@@ -45,7 +45,7 @@ const Addtasks = () => {
         </div>
 
         <div className=" absolute right-2 bottom-2 space-x-3">
-          <button className=" text-[16px] bg-slate-300 pl-2 pr-2 rounded hover:bg-slate-400 font-semibold">
+          <button className=" text-[16px] bg-slate-300 pl-2 pr-2 rounded hover:bg-slate-400 font-semibold" onClick={() => props.setTrigger(false)}>
             Cancel
           </button>
           <button className=" text-[16px] text-white bg-blue-700 pl-2 pr-2 rounded font-semibold">
@@ -54,7 +54,7 @@ const Addtasks = () => {
         </div>
       </form>
     </div>
-  );
+  ): ""   ;
 }
 
 export default Addtasks
