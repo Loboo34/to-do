@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Task from "../components/Task";
 import Sidebar from "../components/Sidebar";
-import AddTask from "../components/AddTask";
 import { useTasksContext } from "../hooks/useTasksContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Addtasks from "../components/Addtasks";
+
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Home = () => {
   const { user } = useAuthContext();
+  const [taskPopup, setTaskPopup] = useState(false)
 
   const { tasks, dispatch } = useTasksContext();
 
@@ -30,10 +35,10 @@ const Home = () => {
       <Navbar />
       {user && (
         <div className=" flex w-full">
-          <div className=" md:w-2/12 mr-8 max-md:hidden">
+          <div className=" mr-8 max-md:hidden">
             <Sidebar />
           </div>
-          <div className=" w-7/12 ">
+          <div className=" w-[100%] ">
             <h1 className=" text-blue-700 text-[22px] pt-5">
               Good morning {user.name}
             </h1>
@@ -50,15 +55,25 @@ const Home = () => {
             </div>
 
             {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
-          </div>
-          <div className=" w-3/12 max-md:hidden">
-            <AddTask />
+            <div className=" pt-4 pb-6">
+              <div
+                className="flex space-x-1 hover:text-blue-700 pb-2 "
+                onClick={() => setTaskPopup(true)}
+              >
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className=" text-blue-700 text-[12px] mt-1 hover:text-white  pl-1 pr-1 pb-1 pt-1 rounded-full hover:bg-blue-700"
+                />
+                <h1 className=" cursor-pointer">Add Task</h1>
+              </div>
+              <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
+            </div>
           </div>
         </div>
       )}
       {!user && (
         <div className=" text-black w-full h-screen flex justify-center ">
-          <svg class="w-full h-full" viewBox="">
+          <svg className="w-full h-full">
             <defs>
               <pattern
                 id="bg_pattern"
@@ -71,7 +86,7 @@ const Home = () => {
                   cy="0.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
@@ -81,8 +96,8 @@ const Home = () => {
                   x2="65"
                   y2="65"
                   stroke="#000095"
-                  stroke-width="6"
-                  stroke-linecap="round"
+                  strokeWidth="6"
+                  strokeLinecap="round"
                   opacity="1"
                 ></line>{" "}
                 <line
@@ -91,8 +106,8 @@ const Home = () => {
                   x2="65"
                   y2="35"
                   stroke="#000095"
-                  stroke-width="6"
-                  stroke-linecap="round"
+                  strokeWidth="6"
+                  strokeLinecap="round"
                   opacity="1"
                 ></line>
                 <circle
@@ -100,7 +115,7 @@ const Home = () => {
                   cy="0.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
@@ -109,7 +124,7 @@ const Home = () => {
                   cy="100.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
@@ -118,7 +133,7 @@ const Home = () => {
                   cy="100.5"
                   r="16"
                   stroke="#101011"
-                  stroke-width="6"
+                  strokeWidth="6"
                   fill="none"
                   opacity="1"
                 ></circle>
