@@ -65,25 +65,7 @@ const Sidebar = () => {
       </div>
 
       <div className="  pb-3">
-        {/* <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
-          {" "}
-          <FontAwesomeIcon icon={faTasks} />
-          <Link to={"/"}>
-            <p className=" hover:text-blue-600 cursor-pointer">All Tasks</p>
-          </Link>
-        </div>
-        <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
-          {" "}
-          <FontAwesomeIcon icon={faArrowAltCircleDown} />
-          <p className=" hover:text-blue-600 cursor-pointer">Today</p>
-        </div>
-        <div className=" flex items-center space-x-2 pb-2 text-[20px] ">
-          {" "}
-          <FontAwesomeIcon icon={faCalendarWeek} />
-          <Link to={"upcomming"}>
-            <p className=" hover:text-blue-600 cursor-pointer">Upcomming</p>
-          </Link>
-        </div> */}
+
         {menuItems.map((item, key) => (
           <NavLink className=" flex space-x-1 pb-3 " key={key}>
             <div

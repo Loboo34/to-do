@@ -12,7 +12,7 @@ const Addtasks = (props) => {
           {/* <label className=' pb-1 text-[18px]'>Name</label> */}
           <input
             type="text"
-            className=" w-[90%] mb-4 rounded border pl-2"
+            className=" w-[90%] h-[35px] mb-4 rounded border pl-2"
             placeholder="Task Name"
           
           />
@@ -20,7 +20,7 @@ const Addtasks = (props) => {
           {/* <label className=' pb-1 text-[18px]'>Description</label> */}
           <input
             type="text"
-            className=" w-[90%] mb-3 rounded border pl-2 text-black"
+            className=" w-[90%] h-[35px] mb-3 rounded border pl-2 text-black"
             placeholder="Description"
           />
         </div>

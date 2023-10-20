@@ -8,13 +8,13 @@ const Popup = (props) => {
         <form className=" flex flex-col">
           <label className=" font-bold pb-2 text-lg">Name</label>
           <input
-            className=" mb-2 pb-1 pt-1 bg-slate-300 w-[90%] rounded"
+            className=" mb-2 pb-1 pt-1 pl-2 text-base bg-slate-300 w-[90%] outline-none rounded"
             type="text"
           ></input>
 
           <label className=" font-bold pb-2 text-lg">Work space</label>
           {/* <input className=' mb-2 pb-1 pt-1 bg-slate-300 w-[90%] rounded' type="text"></input> */}
-          <select className=" mb-2 pb-1 pt-1 bg-slate-300 w-[90%] rounded">
+          <select className=" mb-2 pb-1 pt-1 text-base bg-slate-300 w-[90%] rounded">
             <option>Personal</option>
             <option>Team</option>
           </select>
