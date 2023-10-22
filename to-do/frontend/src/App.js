@@ -16,7 +16,7 @@ import Projects from "./pages/Projects";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="type/:type" element={<TaskType />} />
+      {/* <Route path="type/:type" element={<TaskType />} /> */}
       <Route path="upcomming" element={<Upcomming />} />
       <Route path="projects" element={<Projects />} />
       <Route path="/" element={<Home />} />

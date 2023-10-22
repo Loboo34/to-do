@@ -74,7 +74,7 @@ const Navbar = () => {
           </div>
           <FontAwesomeIcon
             icon={faPlus}
-            className=" text-xl"
+            className=" text-xl pl-2"
             onClick={() => setTaskPopup()}
           />
           <div className=" flex flex-col items-center justify-center fixed ">

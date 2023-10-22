@@ -45,6 +45,7 @@ const Sidebar = () => {
       icon: <FaThList />,
     },
   ];
+ 
 
   const [isOpen, setIsOpen] = useState()
   const [isActive, setIsActive] = useState(false)
@@ -109,7 +110,7 @@ const Sidebar = () => {
             <Popup trigger={btnPopup} setTrigger={setBtnPopup} />
             <FontAwesomeIcon
               icon={faGreaterThan}
-              className=" pt-2 pb-2 pr-2 pl-2 rotate-90 transition ease-out hover:scale-110 bg-slate-400 rounded-md"
+              className=" p-2 transition ease-out hover:scale-110 text-white font-bold bg-blue-700 text-[20px] popmenu"
               onClick={(e) => setIsActive(!isActive)}
             />
           </div>

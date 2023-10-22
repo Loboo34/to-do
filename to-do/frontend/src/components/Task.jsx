@@ -36,29 +36,58 @@ const myStyle = {
             <h1 className=" text-[22px]">{task.title}</h1>
             <h1>{task.date}</h1>
           </div>
-          <ul className=" flex flex-row-reverse space-x-2 absolute right-0 items-center ">
-            <div className="wrapper">
-              <li className=" flex flex-col relative justify-center icon">
-                <span className="tooltip ">Delete</span>
+          <ul className=" flex flex-row-reverse space-x-1 absolute right-0 items-center ">
+            <div class="group relative">
+              <button>
                 <FontAwesomeIcon
                   icon={faTrashCan}
-                  className="  pr-4 text-blue-700  transition ease-in-out hover:scale-110 hover:text-red-600 dicon  "
-                  onClick={handleClick}
+                  className="   pr-4 text-blue-700 transition ease-in-out hover:scale-110 hover:text-red-500  overlay"
                 />
-              </li>
+              </button>
+              <span
+                class="absolute -top-12 left-[15%] -translate-x-[50%] 
+  z-20 origin-left scale-0 px-3 rounded-lg border 
+  border-gray-300 bg-white py-2 text-sm font-bold
+  shadow-md transition-all duration-300 ease-in-out 
+  group-hover:scale-100 tooltip"
+              >
+                DELETE<span></span>
+              </span>
             </div>
-            <li>
-              <FontAwesomeIcon
-                icon={faThumbTack}
-                className="   pr-4 text-blue-700 transition ease-in-out  hover:scale-110  rotate-45 pt-6 overlay"
-              />
-            </li>
-            <li>
-              <FontAwesomeIcon
-                icon={faPencil}
-                className="   pr-4 text-blue-700 transition ease-in-out hover:scale-110  overlay"
-              />
-            </li>
+            <div class="group relative">
+              <button>
+                <FontAwesomeIcon
+                  icon={faThumbTack}
+                  className="   pr-4 text-blue-700 transition ease-in-out hover:scale-110  overlay"
+                />
+              </button>
+              <span
+                class="absolute -top-12 left-[15%] -translate-x-[50%] 
+  z-20 origin-left scale-0 px-3 rounded-lg border 
+  border-gray-300 bg-white py-2 text-sm font-bold
+  shadow-md transition-all duration-300 ease-in-out 
+  group-hover:scale-100 tooltip"
+              >
+                PIN<span></span>
+              </span>
+            </div>
+            <div class="group relative">
+              <button>
+                <FontAwesomeIcon
+                  icon={faPencil}
+                  className="   pr-4 text-blue-700 transition ease-in-out hover:scale-110  overlay"
+                />
+              </button>
+              <span
+                class="absolute -top-12 left-[35%] -translate-x-[50%] 
+  z-20 origin-left scale-0 px-3 rounded-lg border 
+  border-gray-300 bg-white py-2 text-sm font-bold
+  shadow-md transition-all duration-300 ease-in-out 
+  group-hover:scale-100 tooltip"
+              >
+                Edit<span></span>
+              </span>
+            </div>
           </ul>
         </div>
       </div>
