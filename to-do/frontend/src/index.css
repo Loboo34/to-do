@@ -65,7 +65,7 @@
 }
 
 .switch input[type="checkbox"]:checked + .slider {
-  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, rgb(96, 117, 251) 0px 0px 0px 2px inset, rgb(96, 117, 251) 0px 0px 0px 24px inset,
+  box-shadow: rgba(0, 0, 0, 0.62) 0px 0px 5px inset, rgb(96, 117, 251) 0px 0px 0px 2px inset, rgb(64, 90, 253) 0px 0px 0px 24px inset,
         rgba(224, 224, 224, 0.45) 0px 1px 0px 0px;
 }
 
@@ -77,17 +77,30 @@
   display: none;
 }
 
-.dots, .info{
+.list:hover .dots{
+  display: block; 
+}
+.list:hover .dots:hover{
+color: black;
+}
+.list p:hover{
+  color: blue;
+  cursor: pointer;
+}
+/* .dots, .info{
   display: none;
   
 }
+
 .list:hover .dots:hover .info{
 display: block;
+color: aqua;
 }
 .list:hover .dots {
   display: block;
   transition: 9s ease;
-}
+} */
+
 
 .container-input svg {
    transform: translate(0, -50%);
@@ -158,124 +171,137 @@ display: block;
 /* Variation of work by @mrhyddenn for Radios */
 
 
-.check {
-  cursor: pointer;
-  position: relative;
-  margin: auto;
-  width: 18px;
-  height: 18px;
-  -webkit-tap-highlight-color: transparent;
-  transform: translate3d(0, 0, 0);
-}
 
-.check:before {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(34, 50, 84, 0.03);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.check svg {
-  position: relative;
-  z-index: 1;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke: blue;
-  stroke-width: 1.5;
-  transform: translate3d(0, 0, 0);
-  transition: all 0.2s ease;
-}
-
-.check svg path {
-  stroke-dasharray: 60;
-  stroke-dashoffset: 0;
-}
-
-.check svg polyline {
-  stroke-dasharray: 22;
-  stroke-dashoffset: 66;
-}
-
-.check:hover:before {
-  opacity: 1;
-}
-
-.check:hover svg {
-  stroke: blue;
-}
-
-#cbx2:checked + .check svg {
-  stroke: blue;
-}
-
-#cbx2:checked + .check svg path {
-  stroke-dashoffset: 60;
-  transition: all 0.3s linear;
-}
-
-#cbx2:checked + .check svg polyline {
-  stroke-dashoffset: 42;
-  transition: all 0.2s linear;
-  transition-delay: 0.15s;
-}
-.wrapper {
-  display: inline-flex;
-  list-style: none;
-  height: 120px;
-  width: 100%;
-  font-family: "Poppins", sans-serif;
-  justify-content: center;
-}
-.wrapper .icon{
-   position: relative;
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.wrapper .tooltip {
-  position: absolute;
-  top: 0px;
-left: -22px;
-  font-size: 14px;
-  font-weight: 600;
-  background: #fff;
-  color: blue;
-  padding: 5px 8px;
-  border-radius: 5px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  opacity: 0  ;
-}
-
-.wrapper .tooltip::before {
+.tooltip::before{
   position: absolute;
   content: "";
   height: 8px;
-  width: 8px;
+  width: 10px;
   background: #fff;
   bottom: -3px;
   left: 50%;
   transform: translate(-50%) rotate(45deg);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.wrapper .icon:hover{
-  color: red;
+
+.popmenu:active{
+transform: rotate(90deg);
 }
-.wrapper .icon:hover .tooltip {
-top: 0;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+
+
+/* animation */
+
+/* @keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+  }
+}
+.popup-content {
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+} */
+
+.sidebar{
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 640px){
+ .home.expanded{
+position: absolute;
+z-index: 0;
+opacity: 0.9;
+} 
+.home{
+  width: 100%;
+}
+.sidebar{
+  transition: width 0.9s ease;
+}
+}
+@media (min-width: 768px){
+ .home.expanded{
+  margin-left: 250px;
+} 
+.home{
+  transition: margin-left 0.3s ease;
+}
+}
+
+.menu{
+  transition: block 0.3s ease;
+}
+
+
+
+.calendar-current-date .active {
+  background-color: #007bff;
+  color: white;
+}
+
+
+/*pushing a hamburger menu into a pillow texture like background*/
+
+.menuButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 13%;
+  color: #090909;
+  margin-left: 4px;
+  width: 2.7em;
+  height: 2.7em;
+  border-radius: 0.1em;
+ 
+  
+  transition: all .3s;
+ 
+}
+
+
+.menuButton:active {
+  color: red;
+   box-shadow: 6px 6px 12px rgba(255, 255, 255, 0.484),
+             -6px -6px 12px rgba(255, 255, 255, 0.484); 
+}
+
+input[type = "checkbox"] {
+  -webkit-appearance: none;
+  display: none;
+  visibility: hidden;
+}
+
+.menuButton span {
+  width: 30px;
+  height: 4px;
+  background: white;
+  border-radius: 100px;
+  transition: 0.3s ease;
+}
+
+input[type]:checked ~ span.top {
+  transform: translateY(290%)rotate(45deg);
+  width: 40px;
+}
+
+input[type]:checked ~ span.bot {
+  transform: translateY(-270%) rotate(-45deg);
+  width: 40px;
+  
+}
+
+input[type]:checked ~ span.mid {
+  transform: translateX(-20px);
+  opacity: 0;
 }
