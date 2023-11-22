@@ -6,7 +6,7 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaCalendarAlt } from "react-icons/fa";
 const Addtasks = (props) => {
-  const [isActive, setIsActive] = useState(false);
+  //const [isActive, setIsActive] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   //const [year, setYear] = useState(new Date().getFullYear());
   //const [month, setMonth] = useState(new Date().getMonth());
