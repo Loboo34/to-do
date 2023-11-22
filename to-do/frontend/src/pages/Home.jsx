@@ -8,14 +8,28 @@ import Addtasks from "../components/Addtasks";
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Side from "../components/Side";
 
 const Home = () => {
-  const { user } = useAuthContext();
-  const [taskPopup, setTaskPopup] = useState(false)
-
+  // const { user } = useAuthContext();
+  const [taskPopup, setTaskPopup] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [timeOfDay, setTimeOfDay] = useState("");
   const { tasks, dispatch } = useTasksContext();
+  const [isOpen, setIsOpen] = useState();
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentDate(new Date());
+      determineTimeOfDay();
+    }, 1000);
+
+    // Clear the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
   useEffect(() => {
     const fetchTasks = async () => {
       const response = await fetch("/api/tasks/");
@@ -29,49 +43,59 @@ const Home = () => {
   }, [dispatch]);
 
   // const date = new Date()
+  const determineTimeOfDay = () => {
+    const currentHour = currentDate.getHours();
+
+    if (currentHour >= 6 && currentHour <= 12) setTimeOfDay("Morning");
+    else if (currentHour >= 12 && currentHour <= 18) setTimeOfDay("Evening");
+    else {
+      setTimeOfDay("Afternoon");
+    }
+  };
 
   return (
-    <div className=" bg-slate-200">
-      <Navbar />
-      {user && (
-        <div className=" flex w-full">
-          <div className=" mr-8 max-md:hidden">
-            <Sidebar />
-          </div>
-          <div className=" w-[100%] ">
-            <h1 className=" text-blue-700 text-[22px] pt-5">
-              Good morning {user.name}
-            </h1>
-            <div className=" flex space-x-5">
-              <div className=" flex flex-col leading-5">
-                <span className=" text-[15px] text-slate-400">Sunday</span>
-                <span className=" text-center text-[22px] font-bold">13</span>
-                <span className=" text-[15px] text-slate-400">August</span>
-              </div>
-              <div className=" flex flex-col leading-5 pt-4">
-                <span>6:45p.m - 8:00p.m</span>
-                <p>task due: read </p>
-              </div>
-            </div>
+    <div className=" bg-slate-200 relative">
+      <Navbar toggle={toggle} />
 
-            {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
-            <div className=" pt-4 pb-6">
-              <div
-                className="flex space-x-1 hover:text-blue-700 pb-2 "
-                onClick={() => setTaskPopup(true)}
-              >
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className=" text-blue-700 text-[12px] mt-1 hover:text-white  pl-1 pr-1 pb-1 pt-1 rounded-full hover:bg-blue-700"
-                />
-                <h1 className=" cursor-pointer">Add Task</h1>
-              </div>
-              <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
-            </div>
+      <div className=" flex  w-full ">
+        <Sidebar isOpen={isOpen} />
+        <div
+          className={` w-[100%] pb-32 md:ml-[50px] flex flex-col justify-center items-start mt-[50px]  pl-4 md:pl-9  md:box-border   home 
+          ${isOpen ? "expanded" : ""}`}
+        >
+          <div className=" flex flex-col">
+            <h1 className=" text-blue-700 text-[22px] pt-7">
+              {`Good ${timeOfDay} `}
+              Tempest
+            </h1>
+            <p className=" text-[18px] text-slate-400">
+              {currentDate.toDateString()}
+            </p>
+            <p className=" text-[18px] font-bold">{}</p>
           </div>
+
+          <div className=" mt-10 ">
+            {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
+          </div>
+
+          <div className="flex space-x-1  pb-2 pt-4 ">
+            <FontAwesomeIcon
+              icon={faPlus}
+              className=" text-blue-700 text-[12px] mt-1 hover:text-white  pl-1 pr-1 pb-1 pt-1 rounded-full hover:bg-blue-700"
+              onClick={() => setTaskPopup(true)}
+            />
+            <h1
+              className=" cursor-pointer hover:text-blue-700"
+              onClick={() => setTaskPopup(true)}
+            >
+              Add Task
+            </h1>
+          </div>
+          <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
         </div>
-      )}
-      {!user && (
+      </div>
+
+      {/* {!user && (
         <div className=" text-black w-full h-screen flex justify-center ">
           <svg className="w-full h-full">
             <defs>
@@ -169,7 +193,7 @@ const Home = () => {
           </div>
           <div></div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

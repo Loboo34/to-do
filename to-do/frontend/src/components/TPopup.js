@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Popup = (props) => {
+const TPopup = (props) => {
   return (props.trigger) ? (
-    <div className=" bg-[#00000062] fixed top-0 left-0 z-10 flex justify-center items-center w-[100%] h-[100vh] pl-0">
-      <div className=" relative bg-slate-50 w-[100%] max-w-[500px] h-[350px] pt-3 pl-4">
+    <div className=" bg-[#00000062] fixed top-0 left-0 z-10 flex justify-center items-center w-[100%] h-[100vh]  pl-0">
+      <div className=" relative bg-slate-50 md:w-[100%] max-w-[500px] w-[80%] md:h-[350px] h-[300px]  pt-3 pl-4 z-50 max-md:rounded-md">
         <h1 className=" text-2xl font-black pb-4">Add List</h1>
         <form className=" flex flex-col">
           <label className=" font-bold pb-2 text-lg">Name</label>
@@ -45,4 +45,4 @@ const Popup = (props) => {
   ) : "";
 }
 
-export default Popup
+export default TPopup
