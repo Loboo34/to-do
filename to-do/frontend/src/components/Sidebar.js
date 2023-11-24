@@ -10,7 +10,7 @@ import { FaPen, FaShareAlt, FaHeart, FaCopy } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import Popup from "reactjs-popup";
 import TPopup from "./TPopup";
-import ProjectPopup from "./ProjectPopup";
+
 //import { useAuthContext } from '../hooks/useAuthContext';
 const Sidebar = ({ isOpen }) => {
   //const { user} = useAuthContext()
@@ -77,7 +77,7 @@ const Sidebar = ({ isOpen }) => {
 
   const [isActive, setIsActive] = useState(false);
   const [btnPopup, setBtnPopup] = useState(false);
-  const [projectPopup, setProjectPopup] = useState(false);
+
 
 
 

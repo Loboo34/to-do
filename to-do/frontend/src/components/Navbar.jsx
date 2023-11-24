@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCheck,
-  faSearch,
+ 
   faPlus,
   faAngleRight,
-  faHome,
-  faHomeLg,
+  
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useAuthContext } from "../hooks/useAuthContext";
-import Addtasks from "./Addtasks";
-import Sidebar from "./Sidebar";
+//import { useAuthContext } from "../hooks/useAuthContext";
+//import Addtasks from "./Addtasks";
+//import Sidebar from "./Sidebar";
 const Navbar = ({ toggle }) => {
-  const [open, setOpen] = useState(false);
+ const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
 
   // const { user, dispatch } = useAuthContext();
