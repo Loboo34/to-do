@@ -2,19 +2,49 @@ import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
- 
-  faPlus,
-  faAngleRight,
-  
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faAngleRight, faBell, faGear, faUser, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useTasksContext } from "../hooks/useTasksContext";
 
 //import { useAuthContext } from "../hooks/useAuthContext";
 //import Addtasks from "./Addtasks";
 //import Sidebar from "./Sidebar";
 const Navbar = ({ toggle }) => {
- const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
+   const { dispatch } = useTasksContext();
+   const [title, setTitle] = useState("");
+   const [description, setDescription] = useState("");
+   const [type, setType] = useState("");
+   const [date, setDate] = useState("");
+   const [time, setTime] = useState("");
+   const [error, setError] = useState(null);
+
+   const handleSubmit = async (e) => {
+     e.preventDefault();
+
+     const task = { title, description, type, date, time };
+
+     const response = await fetch("/api/tasks", {
+       method: "POST",
+       body: JSON.stringify(task),
+       headers: {
+         "Content-Type": "application/json",
+       },
+     });
+     const json = await response.json();
+
+     if (!response.ok) {
+       setError(json.error);
+     }
+     if (response.ok) {
+       setError(null);
+       setTitle("");
+       setDescription("");
+       setType("");
+       setDate("");
+       setTime("");
+       //console.log("new Task added:", json);
+       dispatch({ type: "CREATE_TASK", payload: json });
+     }
+   };
 
   // const { user, dispatch } = useAuthContext();
 
@@ -28,8 +58,8 @@ const Navbar = ({ toggle }) => {
 
   return (
     <div className=" fixed z-10  text-white pt-2 pb-2 bg-blue-700    flex space-x-3 items-center w-[100%]">
-      <label className="menuButton" for="check">
-        <input type="checkbox" id="check" onClick={toggle} />
+      <label className="menuButton">
+        <input type="checkbox" onClick={toggle} />
         <span className="top"></span>
         <span className="mid"></span>
         <span className="bot"></span>
@@ -46,7 +76,7 @@ const Navbar = ({ toggle }) => {
             <input
               type="search"
               placeholder="Search"
-              className="  hover:bg-white hover:text-black w-[80px] md:w-[200px] pl-[30px] pr-[10px] md:focus:w-[300px] outline-none rounded-sm transition-all duration-75 ease-in-out bg-blue-600 cursor-pointer rounded placeholder:text-white placeholder:hover:text-black "
+              className="  hover:bg-white hover:text-black w-[80px] md:w-[200px] pl-[30px] pr-[10px] md:focus:w-[300px] outline-none rounded-sm transition-all duration-75 ease-in-out bg-blue-600 cursor-pointer placeholder:text-white placeholder:hover:text-black "
             />
             <svg
               fill="#000000"
@@ -68,7 +98,7 @@ const Navbar = ({ toggle }) => {
       <div className="flex absolute right-0 pr-4 space-x-5 items-center">
         <div className=" relative">
           <label className="container">
-            <input type="checkbox" checked="checked" />
+            <input type="checkbox" />
             <svg
               className="bell-regular"
               xmlns="http://www.w3.org/2000/svg"
@@ -98,16 +128,20 @@ const Navbar = ({ toggle }) => {
             {(close) => (
               <div className="fixed top-[100px] left-0 z-10 flex justify-center  w-[100%] h-[100vh] ">
                 <div className=" bg-white  w-[100%] max-w-[500px] max-md:w-[350px] h-[180px] relative pt-3 rounded-md shadow-2xl shadow-black">
-                  <form className=" flex flex-col ">
+                  <form className=" flex flex-col " onSubmit={handleSubmit}>
                     <input
                       type="text"
                       placeholder="Task Name"
                       className=" text-[18px] ml-3 mr-2 mb-3 outline-none"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                     <input
                       type="text"
                       placeholder="Description"
                       className=" text-[18px] ml-3 mr-2 mb-3 outline-none"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
 
                     <div className=" flex space-x-2 pl-3">
@@ -219,7 +253,39 @@ const Navbar = ({ toggle }) => {
             log out
           </h1> */}
         <div className=" flex  items-center space-x-2">
-          <img src="/img/prof.png" alt="pic" className=" w-10" />
+          <Popup
+            trigger={<img src="/img/prof.png" alt="pic" className=" w-10" />}
+            position="bottom right"
+          >
+            <div className=" relative bg-slate-300 h-[270px] w-[250px] pt-3 pl-3 ml-[70px]">
+              <span className=" flex flex-col pb-4">
+                <p className=" text-blue-700 text-[1.2rem] font-semibold">
+                  user-name
+                </p>
+                <p className=" text-[1.2rem]">user@gmail.com</p>
+              </span>
+              <span className=" flex flex-col space-y-2 pb-3">
+                <span className=" bg-slate-400 w-[95%] rounded text-[1.1rem] pl-1 pb-1 pt-1 hover:bg-slate-200 hover:text-blue-700 hover:font-semibold cursor-pointer flex items-center">
+                  <FontAwesomeIcon icon={faBell} className=" pr-2" />
+                  Notifications
+                </span>
+
+                <span className=" bg-slate-400 w-[95%] rounded text-[1.1rem] pl-1 pb-1 pt-1 hover:bg-slate-200 hover:text-blue-700 hover:font-semibold cursor-pointer flex items-center">
+                  <FontAwesomeIcon icon={faUser} className=" pr-2" />
+                  Teams
+                </span>
+                <span className=" bg-slate-400 w-[95%] rounded text-[1.1rem] pl-1 pb-1 pt-1 hover:bg-slate-200 hover:text-blue-700 hover:font-semibold cursor-pointer flex items-center">
+                  <FontAwesomeIcon icon={faGear} className=" pr-2" />
+                  Settings
+                </span>
+              </span>
+              <span className=" absolute bottom-2 right-2 text-[1rem] font-medium hover:text-blue-600 hover:font-bold cursor-pointer flex items-center">
+                Log out
+                <FontAwesomeIcon icon={faArrowRight} className=" pl-2" />
+              </span>
+            </div>
+          </Popup>
+
           <div>{/* <h1 className=" hidden">{user.name}</h1> */}</div>
         </div>
       </div>

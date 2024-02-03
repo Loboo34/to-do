@@ -5,7 +5,8 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-
+import "@mantine/core/styles.css";
+import { createTheme, MantineProvider } from "@mantine/core";
 import Home from "./pages/Home";
 import Singup from "./pages/Singup";
 import Login from "./pages/Singin";
@@ -35,9 +36,11 @@ const router = createBrowserRouter(
 // }
 function App() {
   return (
-    <div className=" ">
-      <RouterProvider router={router} />
-    </div>
+    <MantineProvider>
+      <div className=" ">
+        <RouterProvider router={router} />
+      </div>
+    </MantineProvider>
   );
 }
 

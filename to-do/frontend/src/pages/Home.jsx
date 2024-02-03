@@ -3,12 +3,13 @@ import Navbar from "../components/Navbar";
 import Task from "../components/Task";
 import Sidebar from "../components/Sidebar";
 import { useTasksContext } from "../hooks/useTasksContext";
-import { useAuthContext } from "../hooks/useAuthContext";
+//import { useAuthContext } from "../hooks/useAuthContext";
 import Addtasks from "../components/Addtasks";
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Side from "../components/Side";
+import tasks from "../components/TodoTask";
+import TodoTask from "../components/TodoTask";
 
 const Home = () => {
   // const { user } = useAuthContext();
@@ -30,18 +31,7 @@ const Home = () => {
     // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []);
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await fetch("/api/tasks/");
-      const json = await response.json();
-
-      if (response.ok) {
-        dispatch({ type: "SET_TASKS", payload: json });
-      }
-    };
-    fetchTasks();
-  }, [dispatch]);
-
+  
   // const date = new Date()
   const determineTimeOfDay = () => {
     const currentHour = currentDate.getHours();
@@ -52,18 +42,30 @@ const Home = () => {
       setTimeOfDay("Afternoon");
     }
   };
+  //api call
+useEffect(() => {
+  const fetchTasks = async () => {
+    const response = await fetch("/api/tasks");
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: "SET_TASKS", payload: json });
+    }
+  };
+  fetchTasks();
+}, [dispatch]);
 
   return (
-    <div className=" bg-slate-200 relative">
+    <div className=" bg-slate-200 relative h-full w-full">
       <Navbar toggle={toggle} />
 
       <div className=" flex  w-full ">
         <Sidebar isOpen={isOpen} />
         <div
-          className={` w-[100%] pb-32 md:ml-[50px] flex flex-col justify-center items-start mt-[50px]  pl-4 md:pl-9  md:box-border   home 
+          className={` w-[100%]  pb-32 md:ml-[50px]  justify-center items-start mt-[50px]  pl-4 md:pl-9  md:box-border   home 
           ${isOpen ? "expanded" : ""}`}
         >
-          <div className=" flex flex-col">
+          <div className=" ">
             <h1 className=" text-blue-700 text-[22px] pt-7">
               {`Good ${timeOfDay} `}
               Tempest
@@ -74,8 +76,9 @@ const Home = () => {
             <p className=" text-[18px] font-bold">{}</p>
           </div>
 
-          <div className=" mt-10 ">
-            {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
+          <div className=" mt-8  ">
+            {tasks && tasks.map((task) => (<TodoTask key={task._id} task={task} />))}
+           
           </div>
 
           <div className="flex space-x-1  pb-2 pt-4 ">
@@ -92,6 +95,7 @@ const Home = () => {
             </h1>
           </div>
           <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
+          
         </div>
       </div>
 

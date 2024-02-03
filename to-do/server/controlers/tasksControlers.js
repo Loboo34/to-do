@@ -44,10 +44,10 @@ const filterByType = async (req, res) => {
 
 //add task
 const addTask = async (req, res) => {
-  const { title, type, date, time } = req.body;
+  const { title, description, type, date, time } = req.body;
 
   try {
-    const task = await Tasks.create({ title, type, date, time });
+    const task = await Tasks.create({ title, description, type, date, time });
     res.status(200).json(task);
   } catch (error) {
     res.status(400).json({ message: error.message });

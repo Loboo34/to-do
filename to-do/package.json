@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@mantine/core": "^7.5.1",
+    "@mantine/dates": "^7.5.1",
+    "@mantine/hooks": "^7.5.1",
+    "dayjs": "^1.11.10"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.33",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1"
+  }
+}
