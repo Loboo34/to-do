@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   createBrowserRouter,
   Route,
@@ -6,13 +6,18 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "@mantine/core/styles.css";
-import { createTheme, MantineProvider } from "@mantine/core";
+import "@mantine/dates/styles.css";
+import { MantineProvider } from "@mantine/core";
 import Home from "./pages/Home";
 import Singup from "./pages/Singup";
 import Login from "./pages/Singin";
-import TaskType from "./pages/TaskType";
+//iimport TaskType from "./pages/TaskType";
 import Upcomming from "./pages/Upcomming";
 import Projects from "./pages/Projects";
+import AllTasks from "./pages/AllTasks";
+import TodaysTasks from "./pages/TodaysTasks";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +28,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="signup" element={<Singup />} />
       <Route path="signin" element={<Login />} />
+      <Route path="alltasks" element={<AllTasks />} />
+      <Route path="today" element={<TodaysTasks />} />
     </Route>
   )
 );
@@ -36,11 +43,13 @@ const router = createBrowserRouter(
 // }
 function App() {
   return (
-    <MantineProvider>
-      <div className=" ">
-        <RouterProvider router={router} />
-      </div>
-    </MantineProvider>
+    <div className=" bg-slate-200 relative h-full w-full">
+      <MantineProvider>
+        <div className=" ">
+          <RouterProvider router={router} />
+        </div>
+      </MantineProvider>
+    </div>
   );
 }
 

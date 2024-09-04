@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import Task from "../components/Task";
+
 import Sidebar from "../components/Sidebar";
 import { useTasksContext } from "../hooks/useTasksContext";
 //import { useAuthContext } from "../hooks/useAuthContext";
@@ -8,7 +8,7 @@ import Addtasks from "../components/Addtasks";
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import tasks from "../components/TodoTask";
+
 import TodoTask from "../components/TodoTask";
 
 const Home = () => {
@@ -28,43 +28,45 @@ const Home = () => {
       determineTimeOfDay();
     }, 1000);
 
-    // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  // const date = new Date()
-  const determineTimeOfDay = () => {
-    const currentHour = currentDate.getHours();
 
-    if (currentHour >= 6 && currentHour <= 12) setTimeOfDay("Morning");
-    else if (currentHour >= 12 && currentHour <= 18) setTimeOfDay("Evening");
-    else {
+  const determineTimeOfDay = () => {
+    const hours = currentDate.getHours();
+    if (hours < 12) {
+      setTimeOfDay("Morning");
+    } else if (hours < 18) {
       setTimeOfDay("Afternoon");
+    } else {
+      setTimeOfDay("Evening");
     }
   };
-  //api call
-useEffect(() => {
+
+  //fetch tasks
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchTasks = async () => {
     const response = await fetch("/api/tasks");
     const json = await response.json();
-
     if (response.ok) {
       dispatch({ type: "SET_TASKS", payload: json });
     }
   };
-  fetchTasks();
-}, [dispatch]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   return (
-    <div className=" bg-slate-200 relative h-full w-full">
-      <Navbar toggle={toggle} />
+    <div >
+       <Navbar toggle={toggle} />
 
       <div className=" flex  w-full ">
         <Sidebar isOpen={isOpen} />
         <div
           className={` w-[100%]  pb-32 md:ml-[50px]  justify-center items-start mt-[50px]  pl-4 md:pl-9  md:box-border   home 
           ${isOpen ? "expanded" : ""}`}
-        >
+        > 
           <div className=" ">
             <h1 className=" text-blue-700 text-[22px] pt-7">
               {`Good ${timeOfDay} `}
@@ -77,8 +79,8 @@ useEffect(() => {
           </div>
 
           <div className=" mt-8  ">
-            {tasks && tasks.map((task) => (<TodoTask key={task._id} task={task} />))}
-           
+            {tasks &&
+              tasks.map((task) => <TodoTask key={task._id} task={task} />)}
           </div>
 
           <div className="flex space-x-1  pb-2 pt-4 ">
@@ -94,11 +96,11 @@ useEffect(() => {
               Add Task
             </h1>
           </div>
-          <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
-          
-        </div>
-      </div>
 
+        </div>
+          <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
+       
+</div>
       {/* {!user && (
         <div className=" text-black w-full h-screen flex justify-center ">
           <svg className="w-full h-full">

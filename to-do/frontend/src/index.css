@@ -302,4 +302,8 @@ input[type]:checked ~ span.mid {
   opacity: 0;
 }
 
+.search {
+  outline: #ff0d00 solid;
+}
+
 

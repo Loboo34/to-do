@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import Task from "../components/Task";
+
 
 import { useTasksContext } from "../hooks/useTasksContext";
+import TodoTask from "../components/TodoTask";
 
 const Upcomming = () => {
   const { type } = useParams();
@@ -37,7 +38,7 @@ const Upcomming = () => {
             <div className=" flex flex-col leading-5 pt-4">{type}</div>
           </div>
 
-          {tasks && tasks.map((task) => <Task key={task._id} task={task} />)}
+          {tasks && tasks.map((task) => <TodoTask key={task._id} task={task} />)}
         </div>
         <div className=" w-3/12 max-md:hidden">
          

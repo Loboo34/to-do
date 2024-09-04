@@ -5,7 +5,7 @@ import {
   faEllipsis,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { FaTh, FaList, FaHome, FaCalendar, FaThList } from "react-icons/fa";
+import { FaTh, FaList,  FaCalendar, FaThList } from "react-icons/fa";
 import { FaPen, FaShareAlt, FaHeart, FaCopy } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import Popup from "reactjs-popup";
@@ -13,44 +13,44 @@ import TPopup from "./TPopup";
 import { useProjectsContext } from "../hooks/useProjectsContext";
 
 const Sidebar = ({ isOpen, project }) => {
-  const {projects, dispatch} = useProjectsContext()
-  //const { user} = useAuthContext()
-  const typeData = [
-    {
-      id: 1,
-      name: "Personal",
-      path: "/personal",
-      icon: <FaList />,
-    },
-    {
-      id: 2,
-      name: "Work",
-      path: "/work",
-      icon: "",
-    },
-    {
-      id: 3,
-      name: "Shopping List",
-      path: "/shopping",
-      icon: "",
-    },
-    {
-      id: 4,
-      name: "Grocery List",
-      path: "/groceries",
-    },
-  ];
+  const { projects, dispatch } = useProjectsContext();
+
+  // const typeData = [
+  //   {
+  //     id: 1,
+  //     name: "Personal",
+  //     path: "/personal",
+  //     icon: <FaList />,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Work",
+  //     path: "/work",
+  //     icon: "",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Shopping List",
+  //     path: "/shopping",
+  //     icon: "",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Grocery List",
+  //     path: "/groceries",
+  //   },
+  // ];
   const menuItems = [
     {
       id: 1,
       name: "AllTasks",
-      path: "/",
+      path: "/alltasks",
       icon: <FaList />,
     },
     {
       id: 2,
       name: "Today",
-      path: "/",
+      path: "/today",
       icon: <FaCalendar />,
     },
     {
@@ -91,26 +91,30 @@ const Sidebar = ({ isOpen, project }) => {
   const [isActive, setIsActive] = useState(false);
   const [btnPopup, setBtnPopup] = useState(false);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const response = await fetch ("api/project");
-      const json = await response.json();
-        if (response.ok) {
-          dispatch({ type: "SET_PROJECTS", payload: json });
-        }
-    };
-    fetchProjects()
-  }, [dispatch])
-  const handleClick = async () => {
-    const response = await fetch("/api/project/" + project._id, {
-      method: "DELETE",
-    });
-    const json = await response.json();
 
-    if (response.ok) {
-      dispatch({ type: "DELETE_PROJECT", payload: json });
-    }
-  };
+   //const navigate = useNavigate();
+
+  
+   useEffect(() => {
+     const fetchProjects = async () => {
+       const response = await fetch("api/project");
+       const json = await response.json();
+       if (response.ok) {
+         dispatch({ type: "SET_PROJECTS", payload: json });
+       }
+     };
+     fetchProjects();
+   }, [dispatch]);
+   const handleClick = async () => {
+     const response = await fetch("/api/project/" + project._id, {
+       method: "DELETE",
+     });
+     const json = await response.json();
+
+     if (response.ok) {
+       dispatch({ type: "DELETE_PROJECT", payload: json });
+     }
+   };
   return (
     <div
       className={`h-[100vh] mt-[59px] bg-slate-300 pt-4 mr-6  md:pr-2 text-left transition-all duration-[0.5s] border-box md:fixed z-50  sidebar  ${
@@ -130,9 +134,9 @@ const Sidebar = ({ isOpen, project }) => {
 
       <div className="  pb-3">
         {menuItems.map((item) => (
-          <NavLink className=" flex space-x-2 pb-3 " key={item.id}>
+          <Link className=" flex space-x-2 pb-3 cursor-pointer " key={item.id} to={item.path}>
             <span
-              className={` mb-2 flex items-center text-[1.3rem] w-[40px] h-[30px] rounded-md text-gray-600 pl-4 ${
+              className={` mb-2 flex items-center text-[1.3rem] w-[40px] h-[30px] rounded-md text-BLACK pl-4 ${
                 isOpen ? "max-md:block" : "max-md:hidden"
               }`}
               activeclassname="active"
@@ -153,7 +157,7 @@ const Sidebar = ({ isOpen, project }) => {
                 {item.name}
               </span>
             </span>
-          </NavLink>
+          </Link>
         ))}
       </div>
 
@@ -202,15 +206,14 @@ const Sidebar = ({ isOpen, project }) => {
                   className=" flex pb-2 pl-3 space-x-2 items-center relative hover:bg-slate-300 rounded-sm list"
                   key={project._id}
                 >
-                
-                  <Link to={`/type/${project.name}`}>
+                  <NavLink to={`/type/${project.name}`}>
                     <p
                       className="  text-[1.14rem]  font-bold cursor-pointer"
                       style={{ display: isOpen ? "block" : "none" }}
                     >
-                     # {project.name}
+                      # {project.name}
                     </p>
-                  </Link>
+                  </NavLink>
                   <Popup
                     trigger={
                       <FontAwesomeIcon

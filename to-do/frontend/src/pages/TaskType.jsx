@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
-import Task from "../components/Task";
+
 
 import { useTasksContext } from "../hooks/useTasksContext";
+import TodoTask from '../components/TodoTask';
 
 const TaskType = () => {
     const { type } = useParams();
@@ -40,7 +41,7 @@ const TaskType = () => {
           </div>
 
           {truncatedData &&
-            truncatedData.map((task) => <Task key={task._id} task={task} />)}
+            truncatedData.map((task) => <TodoTask key={task._id} task={task} />)}
         </div>
         <div className=" w-3/12 max-md:hidden">
          

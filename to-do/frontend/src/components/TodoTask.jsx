@@ -1,20 +1,18 @@
-import React from 'react'
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,
   faThumbTack,
   faPencil,
-  faCircle
 } from "@fortawesome/free-solid-svg-icons";
-import { useTasksContext } from '../hooks/useTasksContext';
-
+import { useTasksContext } from "../hooks/useTasksContext";
 
 const TodoTask = ({ task }) => {
-
   const { dispatch } = useTasksContext();
   const handleClick = async () => {
-    const response = await fetch("api/tasks/" + task._id, {
+    const response = await fetch("/api/tasks/" + task._id, {
       method: "DELETE",
+      
     });
     const json = await response.json();
     if (response.ok) {
@@ -23,17 +21,18 @@ const TodoTask = ({ task }) => {
   };
   return (
     <div className="  w-[90%] relative pl-1 rounded flex space-x-2 cursor-pointer hover:bg-slate-300 mb-3 ">
-      <form>
+      {/* <form>
         <div className=" pt-3">
-          {/* <FontAwesomeIcon icon={faCircle} /> */}
+         
           <input type="checkbox" className=" pl-3 pr-3 text-red-700" />
         </div>
-      </form>
+      </form> */}
 
       <div className="pt-2 pb-2 flex flex-col">
         <h1 className=" text-[1.2rem]">{task.title}</h1>
-        <span className=" text-[.8rem]">jan 30 2024</span>
         <span className=" text-blue-500 text-[.8rem]">{task.description}</span>
+        <span className=" text-[.8rem]">{task.dueDate}</span>
+        <span className=" text-[.8rem]">{task.type}</span>
       </div>
       <div className=" absolute right-1 h-full flex items-center">
         <div className="group relative">
@@ -65,7 +64,7 @@ const TodoTask = ({ task }) => {
           </span>
         </div>
         <div className="group relative">
-          <button>
+          <button className="">
             <FontAwesomeIcon
               icon={faTrashCan}
               className="   pr-4 text-blue-700 text-[1.2rem] transition ease-in-out hover:scale-110 hover:text-red-500  overlay"
@@ -81,4 +80,4 @@ const TodoTask = ({ task }) => {
   );
 };
 
-export default TodoTask
+export default TodoTask;

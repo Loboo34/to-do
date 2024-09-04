@@ -1,50 +1,59 @@
 import React, { useState } from "react";
-//import { Link } from "react-router-dom";
+
 import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faAngleRight, faBell, faGear, faUser, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faAngleRight,
+  faBell,
+  faGear,
+  faUser,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { DatePickerInput } from "@mantine/dates";
+
 import { useTasksContext } from "../hooks/useTasksContext";
 
 //import { useAuthContext } from "../hooks/useAuthContext";
-//import Addtasks from "./Addtasks";
-//import Sidebar from "./Sidebar";
+
 const Navbar = ({ toggle }) => {
-   const { dispatch } = useTasksContext();
-   const [title, setTitle] = useState("");
-   const [description, setDescription] = useState("");
-   const [type, setType] = useState("");
-   const [date, setDate] = useState("");
-   const [time, setTime] = useState("");
-   const [error, setError] = useState(null);
+  const { dispatch } = useTasksContext();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+  const [dueDate, setDueDate] = useState(null);
+  const [time, setTime] = useState("");
+  const [error, setError] = useState(null);
 
-   const handleSubmit = async (e) => {
-     e.preventDefault();
+  const handleSubmit = async () => {
+   // e.preventDefault();
 
-     const task = { title, description, type, date, time };
+    const task = { title, description, type, dueDate, time };
 
-     const response = await fetch("/api/tasks", {
-       method: "POST",
-       body: JSON.stringify(task),
-       headers: {
-         "Content-Type": "application/json",
-       },
-     });
-     const json = await response.json();
+    const response = await fetch("/api/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
 
-     if (!response.ok) {
-       setError(json.error);
-     }
-     if (response.ok) {
-       setError(null);
-       setTitle("");
-       setDescription("");
-       setType("");
-       setDate("");
-       setTime("");
-       //console.log("new Task added:", json);
-       dispatch({ type: "CREATE_TASK", payload: json });
-     }
-   };
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      setError(null);
+      setTitle("");
+      setDescription("");
+      setType("");
+      setDueDate("");
+      setTime("");
+      //console.log("new Task added:", json);
+      dispatch({ type: "CREATE_TASK", payload: json });
+    }
+  };
+
 
   // const { user, dispatch } = useAuthContext();
 
@@ -126,9 +135,9 @@ const Navbar = ({ toggle }) => {
             nested
           >
             {(close) => (
-              <div className="fixed top-[100px] left-0 z-10 flex justify-center  w-[100%] h-[100vh] ">
-                <div className=" bg-white  w-[100%] max-w-[500px] max-md:w-[350px] h-[180px] relative pt-3 rounded-md shadow-2xl shadow-black">
-                  <form className=" flex flex-col " onSubmit={handleSubmit}>
+              <div className="fixed top-[100px] left-0 flex justify-center  w-[100%] h-[100vh] ">
+                <div className=" bg-white  w-[100%] max-w-[500px] max-md:w-[350px] h-[180px] relative pt-3 rounded-md">
+                  <form className=" flex flex-col" >
                     <input
                       type="text"
                       placeholder="Task Name"
@@ -145,14 +154,13 @@ const Navbar = ({ toggle }) => {
                     />
 
                     <div className=" flex space-x-2 pl-3">
-                      <button className=" text-[14px] text-blue-700 font-semibold pl-1 pr-1 bg-white border-2 border-[#00000046]  rounded-md hover:bg-slate-200 flex ">
-                        <img
-                          src="/img/calendar.png"
-                          className=" w-3 h-3 mt-1 mr-1"
-                          alt="calendar"
-                        />
-                        Due Date
-                      </button>
+                      <DatePickerInput
+                        placeholder="Due Date"
+                        value={dueDate}
+                        onChange={(date) => setDueDate(date)}
+                        inputformat="MM/DD/YYYY"
+                        error={error}
+                      />
                       <button className=" text-[14px] text-blue-700 font-semibold pl-1 pr-1 bg-white border-2 border-[#00000046]    rounded-md hover:bg-gray-300 flex">
                         <img
                           src="/img/flag.png"
@@ -235,6 +243,10 @@ const Navbar = ({ toggle }) => {
                         type="Submit"
                         value="Add Task"
                         className=" bg-blue-700 text-white rounded-md pl-2 pr-2"
+                        onClick={() => {
+                          handleSubmit();
+                          close();
+                        }}
                       />
                     </div>
                   </form>
@@ -246,18 +258,14 @@ const Navbar = ({ toggle }) => {
         <div className=" flex flex-col items-center justify-center fixed ">
           {/* <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} /> */}
         </div>
-        {/* <h1
-            className=" text-white cursor-pointer hidden"
-            onClick={handleSingout}
-          >
-            log out
-          </h1> */}
+
         <div className=" flex  items-center space-x-2">
           <Popup
             trigger={<img src="/img/prof.png" alt="pic" className=" w-10" />}
             position="bottom right"
+            nested
           >
-            <div className=" relative bg-slate-300 h-[270px] w-[250px] pt-3 pl-3 ml-[70px]">
+            <div className=" relative bg-slate-300 h-[270px] w-[250px] pt-3 pl-3 ml-[70px] rounded">
               <span className=" flex flex-col pb-4">
                 <p className=" text-blue-700 text-[1.2rem] font-semibold">
                   user-name
@@ -282,6 +290,12 @@ const Navbar = ({ toggle }) => {
               <span className=" absolute bottom-2 right-2 text-[1rem] font-medium hover:text-blue-600 hover:font-bold cursor-pointer flex items-center">
                 Log out
                 <FontAwesomeIcon icon={faArrowRight} className=" pl-2" />
+                {/* <h1
+            className=" text-white cursor-pointer hidden"
+            onClick={handleSingout}
+          >
+            log out
+          </h1> */}
               </span>
             </div>
           </Popup>
