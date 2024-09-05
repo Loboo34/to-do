@@ -8,22 +8,39 @@ const getTasks = async (req, res) => {
   res.status(200).json(tasks);
 };
 
+//get incomplete tasks
+const getIncompleteTasks = async (req, res) => {
+  const tasks = await Tasks.find({ status: false });
+
+  res.status(200).json(tasks);
+};
+
+//get completed tasks
+const getCompletedTasks = async (req, res) => {
+  const tasks = await Tasks.find({ status: true });
+
+
+  res.status(200).json(tasks);
+};
+
 //get single task
 const getTask = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such Task" });
+    return res.status(404).json({ error: "No such Tassssk" });
   }
 
   const task = await Tasks.findById(id);
 
   if (!task) {
-    return res.status(404).json({ error: "No such Task" });
+    return res.status(404).json({ error: "No such Tasssssk" });
   }
 
   res.status(200).json(task);
 };
+
+
 
 //get tasks by type
 const filterByType = async (req, res) => {
@@ -44,10 +61,19 @@ const filterByType = async (req, res) => {
 
 //add task
 const addTask = async (req, res) => {
-  const { title, description, type, date, time } = req.body;
+  const { title, description, type, dueDate, time, status } = req.body;
 
   try {
-    const task = await Tasks.create({ title, description, type, date, time });
+    const task = await Tasks.create({
+      title,
+      description,
+      type,
+      dueDate,
+      time,
+      status : false,
+    });
+
+    //task.status = "pending";
     res.status(200).json(task);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -68,24 +94,56 @@ const deleteTask = async (req, res) => {
     return res.status(404).json({ error: "No such Task" });
   }
 
+  res.status(200).json({ task,  message: "Task deleted" });
+};
+
+//update task
+const updateTask = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, type, dueDate, time } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Task" });
+  }
+
+  const task = await Tasks.findOneAndUpdate(
+    { _id: id },
+    { title, description, type, dueDate, time },
+    { new: true }
+  );
+
+  if (!task) {
+    return res.status(404).json({ error: "No such Task" });
+  }
+
   res.status(200).json(task);
 };
 
-// const getCategory = async (req, res) => {
-//   const type = req.query.category;
 
-//   if (!type) {
-//     return res.status(404).json({ error: "type not specified" });
-//   }
-//   try {
-//     const filteredTasks = await Tasks.find({ category });
+//update task status
+const updateTaskStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
 
-//     res.json({ tasks: filteredTasks });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).json({ error: "server error" });
-//   }
-// };
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Task" });
+  }
+
+  const task = await Tasks.findOneAndUpdate(
+    { _id: id },
+    { status: true},
+    { new: true }
+  );
+
+  if (!task) {
+    return res.status(404).json({ error: "No such Task" });
+  }
+
+  res.status(200).json(task);
+};
+
+
+
 
 module.exports = {
   getTasks,
@@ -93,4 +151,8 @@ module.exports = {
   addTask,
   deleteTask,
   filterByType,
+  updateTask,
+  getCompletedTasks,
+  getIncompleteTasks,
+  updateTaskStatus,
 };

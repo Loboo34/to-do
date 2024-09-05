@@ -21,12 +21,11 @@ const TodoTask = ({ task }) => {
   };
   return (
     <div className="  w-[90%] relative pl-1 rounded flex space-x-2 cursor-pointer hover:bg-slate-300 mb-3 ">
-      {/* <form>
-        <div className=" pt-3">
-         
-          <input type="checkbox" className=" pl-3 pr-3 text-red-700" />
+      <>
+        <div className=" p-3">
+          <input type="checkbox" className="" />
         </div>
-      </form> */}
+      </> 
 
       <div className="pt-2 pb-2 flex flex-col">
         <h1 className=" text-[1.2rem]">{task.title}</h1>
