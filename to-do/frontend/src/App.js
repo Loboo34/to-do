@@ -43,7 +43,7 @@ const router = createBrowserRouter(
 // }
 function App() {
   return (
-    <div className=" bg-slate-200 relative h-full w-full">
+    <div className=" bg-slate-200 relative h-screen">
       <MantineProvider>
         <div className=" ">
           <RouterProvider router={router} />

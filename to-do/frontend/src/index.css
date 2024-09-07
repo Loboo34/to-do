@@ -272,11 +272,11 @@ opacity: 0.9;
              -6px -6px 12px rgba(255, 255, 255, 0.484); 
 }
 
-/* input[type = "checkbox"] {
+ .checkBox {
   -webkit-appearance: none;
   display: none;
   visibility: hidden;
-} */
+} 
 
 .menuButton span {
   width: 30px;
@@ -286,7 +286,7 @@ opacity: 0.9;
   transition: 0.3s ease;
 }
 
-/* input[type]:checked ~ span.top {
+ input[type]:checked ~ span.top {
   transform: translateY(290%)rotate(45deg);
   width: 40px;
 }
@@ -300,7 +300,7 @@ input[type]:checked ~ span.bot {
 input[type]:checked ~ span.mid {
   transform: translateX(-20px);
   opacity: 0;
-} */
+} 
 
 .search {
   outline: #ff0d00 solid;

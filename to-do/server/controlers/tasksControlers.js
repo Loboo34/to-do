@@ -19,7 +19,6 @@ const getIncompleteTasks = async (req, res) => {
 const getCompletedTasks = async (req, res) => {
   const tasks = await Tasks.find({ status: true });
 
-
   res.status(200).json(tasks);
 };
 
@@ -40,14 +39,12 @@ const getTask = async (req, res) => {
   res.status(200).json(task);
 };
 
-
-
 //get tasks by type
 const filterByType = async (req, res) => {
   const type = req.query.type;
 
-  if(!type) {
-    res.status(404).json({message: 'type param required'})
+  if (!type) {
+    res.status(404).json({ message: "type param required" });
   }
 
   try {
@@ -70,7 +67,7 @@ const addTask = async (req, res) => {
       type,
       dueDate,
       time,
-      status : false,
+      status: false,
     });
 
     //task.status = "pending";
@@ -94,7 +91,7 @@ const deleteTask = async (req, res) => {
     return res.status(404).json({ error: "No such Task" });
   }
 
-  res.status(200).json({ task,  message: "Task deleted" });
+  res.status(200).json({ task, message: "Task deleted" });
 };
 
 //update task
@@ -119,7 +116,6 @@ const updateTask = async (req, res) => {
   res.status(200).json(task);
 };
 
-
 //update task status
 const updateTaskStatus = async (req, res) => {
   const { id } = req.params;
@@ -131,7 +127,7 @@ const updateTaskStatus = async (req, res) => {
 
   const task = await Tasks.findOneAndUpdate(
     { _id: id },
-    { status: true},
+    { status: true },
     { new: true }
   );
 
@@ -141,9 +137,6 @@ const updateTaskStatus = async (req, res) => {
 
   res.status(200).json(task);
 };
-
-
-
 
 module.exports = {
   getTasks,

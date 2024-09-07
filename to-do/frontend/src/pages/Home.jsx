@@ -10,73 +10,48 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import TodoTask from "../components/TodoTask";
+import Date from "../components/Date";
+import DateToDay from "../components/Date";
 
 const Home = () => {
   // const { user } = useAuthContext();
   const [taskPopup, setTaskPopup] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [timeOfDay, setTimeOfDay] = useState("");
+ 
   const { tasks, dispatch } = useTasksContext();
   const [isOpen, setIsOpen] = useState();
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentDate(new Date());
-      determineTimeOfDay();
-    }, 1000);
+ 
 
-    return () => clearInterval(intervalId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const determineTimeOfDay = () => {
-    const hours = currentDate.getHours();
-    if (hours < 12) {
-      setTimeOfDay("Morning");
-    } else if (hours < 18) {
-      setTimeOfDay("Afternoon");
-    } else {
-      setTimeOfDay("Evening");
-    }
-  };
-
-  //fetch tasks
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchTasks = async () => {
-    const response = await fetch("/api/tasks");
-    const json = await response.json();
-    if (response.ok) {
-      dispatch({ type: "SET_TASKS", payload: json });
-    }
-  };
+  
 
   useEffect(() => {
+   const fetchTasks = async () => {
+      const response = await fetch("/api/tasks/incomplete");
+      const json = await response.json();
+      if (response.ok) {
+        dispatch({ type: "SET_TASKS", payload: json });
+      }
+    }
     fetchTasks();
-  }, [fetchTasks]);
+ const intervalId = setInterval(fetchTasks, 5000);
+
+ return () => clearInterval(intervalId);
+  }, [dispatch]);
 
   return (
-    <div >
-       <Navbar toggle={toggle} />
+    <div>
+      <Navbar toggle={toggle} />
 
       <div className=" flex  w-full ">
         <Sidebar isOpen={isOpen} />
         <div
           className={` w-[100%]  pb-32 md:ml-[50px]  justify-center items-start mt-[50px]  pl-4 md:pl-9  md:box-border   home 
           ${isOpen ? "expanded" : ""}`}
-        > 
-          <div className=" ">
-            <h1 className=" text-blue-700 text-[22px] pt-7">
-              {`Good ${timeOfDay} `}
-              Tempest
-            </h1>
-            <p className=" text-[18px] text-slate-400">
-              {currentDate.toDateString()}
-            </p>
-            <p className=" text-[18px] font-bold">{}</p>
-          </div>
+        >
+         <DateToDay />
 
           <div className=" mt-8  ">
             {tasks &&
@@ -96,11 +71,9 @@ const Home = () => {
               Add Task
             </h1>
           </div>
-
-        </div>
           <Addtasks trigger={taskPopup} setTrigger={setTaskPopup} />
-       
-</div>
+        </div>
+      </div>
       {/* {!user && (
         <div className=" text-black w-full h-screen flex justify-center ">
           <svg className="w-full h-full">

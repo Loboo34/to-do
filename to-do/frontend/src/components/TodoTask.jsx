@@ -12,20 +12,35 @@ const TodoTask = ({ task }) => {
   const handleClick = async () => {
     const response = await fetch("/api/tasks/" + task._id, {
       method: "DELETE",
-      
     });
     const json = await response.json();
     if (response.ok) {
       dispatch({ type: "DELETE_TASK", payload: json });
     }
   };
+
+  //function to change task status
+  const handleDone = async () => {
+    const response = await fetch("api/tasks/" + task._id + "/status", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+     // body: JSON.stringify({ status: true }),
+    });
+    const json = await response.json();
+    if (response.ok) {
+      dispatch({ type: "DONE_TASK", payload: json });
+    }
+  };
+
   return (
     <div className="  w-[90%] relative pl-1 rounded flex space-x-2 cursor-pointer hover:bg-slate-300 mb-3 ">
       <>
         <div className=" p-3">
-          <input type="checkbox" className="" />
+          <input type="checkbox" className="" onClick={handleDone} />
         </div>
-      </> 
+      </>
 
       <div className="pt-2 pb-2 flex flex-col">
         <h1 className=" text-[1.2rem]">{task.title}</h1>

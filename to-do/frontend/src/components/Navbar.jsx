@@ -26,7 +26,7 @@ const Navbar = ({ toggle }) => {
   const [error, setError] = useState(null);
 
   const handleSubmit = async () => {
-   // e.preventDefault();
+    // e.preventDefault();
 
     const task = { title, description, type, dueDate, time };
 
@@ -54,7 +54,6 @@ const Navbar = ({ toggle }) => {
     }
   };
 
-
   // const { user, dispatch } = useAuthContext();
 
   // const singOut = () => {
@@ -68,7 +67,7 @@ const Navbar = ({ toggle }) => {
   return (
     <div className=" fixed z-10  text-white pt-2 pb-2 bg-blue-700    flex space-x-3 items-center w-[100%]">
       <label className="menuButton">
-        <input type="checkbox" onClick={toggle} />
+        <input type="checkbox" onClick={toggle} className="checkBox" />
         <span className="top"></span>
         <span className="mid"></span>
         <span className="bot"></span>
@@ -135,9 +134,9 @@ const Navbar = ({ toggle }) => {
             nested
           >
             {(close) => (
-              <div className="fixed top-[100px] left-0 flex justify-center  w-[100%] h-[100vh] ">
-                <div className=" bg-white  w-[100%] max-w-[500px] max-md:w-[350px] h-[180px] relative pt-3 rounded-md">
-                  <form className=" flex flex-col" >
+              <div className="fixed top-[0px] left-0 flex justify-center  w-[100%] h-[100vh] bg-opacity-30 bg-black ">
+                <div className=" bg-white  w-[100%] max-w-[500px] max-md:w-[350px] h-[180px] relative pt-3 rounded-md top-[150px] ">
+                  <form className=" flex flex-col">
                     <input
                       type="text"
                       placeholder="Task Name"

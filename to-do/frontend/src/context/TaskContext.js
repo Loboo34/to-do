@@ -16,6 +16,13 @@ export const tasksReducer = (state, action) => {
       return {
         workouts: state.tasks.filter((task) => task._id !== action.payload._id),
       };
+//case to change task status
+    case "DONE_TASK":
+      return {
+        tasks: state.tasks.map((task) =>
+          task._id === action.payload._id ? action.payload : task
+        ),
+      };
     default:
       return state;
   }
