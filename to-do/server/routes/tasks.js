@@ -29,14 +29,16 @@ router.get("/:id", getTask);
 //post task
 router.post("/", addTask);
 
+//update task status
+router.patch("/:id/status", updateTaskStatus);
+
 //delete task
 router.delete("/:id", deleteTask);
 
 //update task
 router.patch("/:id", updateTask);
 
-//update task status
-router.patch("/:id/status", updateTaskStatus);
+
 
 
 module.exports = router;

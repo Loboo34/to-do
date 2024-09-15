@@ -10,13 +10,14 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import TodoTask from "../components/TodoTask";
-import Date from "../components/Date";
+//import Date from "../components/Date";
 import DateToDay from "../components/Date";
+
 
 const Home = () => {
   // const { user } = useAuthContext();
   const [taskPopup, setTaskPopup] = useState(false);
- 
+ const [isLoading, setIsLoading] = useState(false);
   const { tasks, dispatch } = useTasksContext();
   const [isOpen, setIsOpen] = useState();
   const toggle = () => {
@@ -25,21 +26,23 @@ const Home = () => {
 
  
 
-  
+   useEffect(() => {
+     const fetchTasks = async () => {
+       const response = await fetch("/api/tasks/incomplete");
+       const json = await response.json();
+       if (response.ok) {
+         dispatch({ type: "SET_TASKS", payload: json });
+       }
+     };
+     fetchTasks();
+   
+     const intervalId = setInterval(fetchTasks, 1000);
 
-  useEffect(() => {
-   const fetchTasks = async () => {
-      const response = await fetch("/api/tasks/incomplete");
-      const json = await response.json();
-      if (response.ok) {
-        dispatch({ type: "SET_TASKS", payload: json });
-      }
-    }
-    fetchTasks();
- const intervalId = setInterval(fetchTasks, 5000);
+     return () => clearInterval(intervalId);
+   }, [dispatch]);
 
- return () => clearInterval(intervalId);
-  }, [dispatch]);
+
+
 
   return (
     <div>
@@ -53,10 +56,15 @@ const Home = () => {
         >
          <DateToDay />
 
-          <div className=" mt-8  ">
-            {tasks &&
-              tasks.map((task) => <TodoTask key={task._id} task={task} />)}
+          <div className="">
+            <h1 className="text-4xl">
+             
+              {tasks &&
+                tasks.map((task) => <TodoTask key={task._id} task={task} />)}
+            </h1>
           </div>
+
+
 
           <div className="flex space-x-1  pb-2 pt-4 ">
             <FontAwesomeIcon

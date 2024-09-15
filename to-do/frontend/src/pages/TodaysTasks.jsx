@@ -5,6 +5,7 @@ import { useTasksContext } from "../hooks/useTasksContext";
 import TodoTask from '../components/TodoTask';
 const TodaysTasks = () => {
    const [isOpen, setIsOpen] = useState();
+   const [isLoading, setIsLoading] = useState(false);
    const toggle = () => {
      setIsOpen(!isOpen);
    };
@@ -12,17 +13,18 @@ const TodaysTasks = () => {
     const { dispatch, tasks } = useTasksContext();
    //FETCH TODAYS TASKS
     // eslint-disable-next-line react-hooks/exhaustive-deps
-   const fetchTasks = async () => {
-     const response = await fetch("/api/tasks/incomplete");
-     const json = await response.json();
-     if (response.ok) {
-       dispatch({ type: "SET_TASKS", payload: json });
-     }
-   };
-
-   useEffect(() => {
-     fetchTasks();
-   }, [fetchTasks]);
+    useEffect(() => {
+      const fetchTasks = async () => {
+        setIsLoading(true);
+        const response = await fetch("/api/tasks/today");
+        const json = await response.json();
+        if (response.ok) {
+          dispatch({ type: "SET_TASKS", payload: json });
+        }
+        setIsLoading(false);
+      };
+      fetchTasks();
+    }, [dispatch]);
   return (
     <div >
       <Navbar toggle={toggle} />

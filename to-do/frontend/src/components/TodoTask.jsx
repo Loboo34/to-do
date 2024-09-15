@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,
@@ -8,9 +8,11 @@ import {
 import { useTasksContext } from "../hooks/useTasksContext";
 
 const TodoTask = ({ task }) => {
-  const { dispatch } = useTasksContext();
+  const { dispatch, tasks } = useTasksContext();
+  
+  //function to delete task
   const handleClick = async () => {
-    const response = await fetch("/api/tasks/" + task._id, {
+    const response = await fetch("api/tasks/" + task._id, {
       method: "DELETE",
     });
     const json = await response.json();
@@ -18,6 +20,8 @@ const TodoTask = ({ task }) => {
       dispatch({ type: "DELETE_TASK", payload: json });
     }
   };
+
+
 
   //function to change task status
   const handleDone = async () => {
@@ -33,6 +37,20 @@ const TodoTask = ({ task }) => {
       dispatch({ type: "DONE_TASK", payload: json });
     }
   };
+
+//  useEffect(() => {
+//     const fetchTasks = async () => {
+//       const response = await fetch("/api/tasks/incomplete");
+//       const json = await response.json();
+//       if (response.ok) {
+//         dispatch({ type: "SET_TASKS", payload: json });
+//       }
+//     };
+
+//     fetchTasks();
+//   }
+//   ,[dispatch]);
+
 
   return (
     <div className="  w-[90%] relative pl-1 rounded flex space-x-2 cursor-pointer hover:bg-slate-300 mb-3 ">
